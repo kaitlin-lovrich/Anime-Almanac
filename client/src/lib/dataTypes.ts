@@ -3,23 +3,67 @@ export type GenreType = {
   mal_id: number;
 };
 
-export type Title = {
+type Image = {
+  image_url: string;
+};
+
+type Trailer = {
+  embed_url: string;
+};
+
+export type TitleData = {
   title_english: string;
-  images: Images;
-  genres: Array<string>;
+  images: {
+    jpg: Image;
+  };
+  genres: string[];
   type: string;
   year: number;
   rating: string;
   episodes: string;
   duration: string;
-  trailer: object;
+  trailer: Trailer;
   mal_id: number;
 };
 
-type ImageFormat = {
-  image_url: string;
+export type Title = {
+  data: TitleData[];
 };
 
-type Images = {
-  jpg: ImageFormat;
-};
+// type ImageFormat = {
+//   image_url: string;
+// };
+
+// type Images = {
+//   jpg: ImageFormat;
+// };
+
+// export type Title = {
+//   title_english: string;
+//   images: Images;
+//   genres: Array<string>;
+//   type: string;
+//   year: number;
+//   rating: string;
+//   episodes: string;
+//   duration: string;
+//   trailer: object;
+//   mal_id: number;
+// };
+
+// titlesArray: {
+//   data: [
+//     {
+//       title_english: 'title',
+//       images: { jpg: { image_url: 'string' } },
+//       genres: ['string', 'string'],
+//       type: 'string',
+//       year: 0,
+//       rating: 'string',
+//       episodes: 'string',
+//       duration: 'string',
+//       trailer: { embed_url: 'string' },
+//       mal_id: 0,
+//     },
+//   ];
+// }

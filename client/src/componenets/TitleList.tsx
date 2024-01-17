@@ -1,8 +1,8 @@
-import { Title } from '../lib/dataTypes';
+import { TitleData } from '../lib/dataTypes';
 import TitleCard from './TitleCard';
 
 type TitleListProps = {
-  titles: Title[];
+  titles: TitleData[];
 };
 
 export default function TitleList({ titles }: TitleListProps) {
