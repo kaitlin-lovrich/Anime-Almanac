@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { type GenreType } from '../lib/dataTypes';
-import React from 'react';
 import GenreTitlesRow from '../componenets/GenreTitlesRow';
 import { genreData } from '../lib/genreData';
 
@@ -38,12 +37,10 @@ export default function HomePage() {
   }, []);
 
   return (
-    <React.Fragment>
-      <div>
-        {genres.map((genre) => (
-          <GenreTitlesRow key={genre.mal_id} genre={genre} />
-        ))}
-      </div>
-    </React.Fragment>
+    <div className="content-container">
+      {genres.map((genre) => (
+        <GenreTitlesRow key={genre.mal_id} genre={genre} />
+      ))}
+    </div>
   );
 }
