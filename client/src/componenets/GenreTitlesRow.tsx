@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GenreType, Title, TitleData } from '../lib/dataTypes';
 import Genre from './Genre';
 import TitleList from './TitleList';
@@ -61,9 +61,9 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   }
 
   return (
-    <React.Fragment>
+    <div className="genre-title-row">
       <Genre key={genre.mal_id} genre={genre.name} />
       <TitleList titles={genreTitles} />
-    </React.Fragment>
+    </div>
   );
 }

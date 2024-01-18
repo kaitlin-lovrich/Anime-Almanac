@@ -3,5 +3,5 @@ type GenreProps = {
 };
 
 export default function Genre({ genre }: GenreProps) {
-  return <h2>{genre}</h2>;
+  return <h2 className="genre-heading">{genre}</h2>;
 }

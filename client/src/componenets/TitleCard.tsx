@@ -7,7 +7,7 @@ type TitleCardProps = {
 
 export default function TitleCard({ title }: TitleCardProps) {
   return (
-    <>
+    <div className="title-card">
       <div className="image-container">
         <img
           src={title.images.jpg.image_url}
@@ -15,6 +15,6 @@ export default function TitleCard({ title }: TitleCardProps) {
         />
       </div>
       <div>{title.title_english}</div>
-    </>
+    </div>
   );
 }
