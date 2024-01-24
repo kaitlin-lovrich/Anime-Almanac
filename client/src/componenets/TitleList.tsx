@@ -8,7 +8,7 @@ type TitleListProps = {
 
 export default function TitleList({ titles }: TitleListProps) {
   return (
-    <div className="title-list">
+    <div className="title-list flex font-heading">
       {titles.map((title) => {
         return (
           <React.Fragment key={title.mal_id}>
