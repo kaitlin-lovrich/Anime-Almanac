@@ -16,6 +16,10 @@ export default {
       'custom-gradient':
         'linear-gradient(#4E3636 10%, #775A5A 50%, #4E3636 90%)',
     },
+    boxShadow: {
+      'custom-inset':
+        'inset -7px 0 5px rgba(0, 0, 0, 0.2), inset 7px 0 5px rgba(0, 0, 0, 0.2), inset 0 -7px 5px rgba(0, 0, 0, 0.2)',
+    },
     extend: {},
   },
   plugins: [],
