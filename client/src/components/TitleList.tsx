@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TitleData } from '../lib/dataTypes';
 import TitleCard from './TitleCard';
 import { FaChevronRight } from 'react-icons/fa6';
