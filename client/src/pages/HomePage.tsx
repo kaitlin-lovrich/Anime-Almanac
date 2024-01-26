@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { type GenreType } from '../lib/dataTypes';
-import GenreTitlesRow from '../componenets/GenreTitlesRow';
+import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData } from '../lib/genreData';
 
 export default function HomePage() {
@@ -37,7 +37,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="content-container">
+    <div className="flex justify-center">
       {genres.map((genre) => (
         <GenreTitlesRow key={genre.mal_id} genre={genre} />
       ))}
