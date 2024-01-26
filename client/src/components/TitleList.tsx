@@ -9,32 +9,26 @@ type TitleListProps = {
 
 export default function TitleList({ titles }: TitleListProps) {
   const [current, setCurrent] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState(7); // default number of items
+  const [itemsToShow, setItemsToShow] = useState(6); // default number of items
 
   const updateItemsToShow = () => {
     const width = window.innerWidth;
     if (width <= 640) {
-      // Small screens
       setItemsToShow(2);
     } else if (width <= 768) {
-      // Medium screens
       setItemsToShow(3);
     } else if (width <= 1024) {
-      // Large screens
       setItemsToShow(4);
     } else if (width <= 1280) {
-      // XL screens
       setItemsToShow(5);
     } else {
-      // 2XL screens and above
       setItemsToShow(6);
     }
   };
 
   useEffect(() => {
     window.addEventListener('resize', updateItemsToShow);
-    updateItemsToShow(); // Initial update on component mount
-
+    updateItemsToShow();
     return () => {
       window.removeEventListener('resize', updateItemsToShow);
     };
@@ -42,15 +36,24 @@ export default function TitleList({ titles }: TitleListProps) {
 
   const showNextItems = () => {
     setCurrent((prevCurrent) => {
-      let nextIndex = prevCurrent + itemsToShow;
-      if (nextIndex >= titles.length) {
-        nextIndex = 0;
-      }
-      return nextIndex;
+      // Calculate next index, wrapping around to the beginning if needed
+      return (prevCurrent + itemsToShow) % filteredTitles.length;
     });
   };
 
-  const visibleTitles = titles.slice(current, current + itemsToShow);
+  const filteredTitles = titles.filter((title) => title.title_english != null);
+
+  const visibleTitles = (() => {
+    // Get a slice of titles starting from 'current'
+    let items = filteredTitles.slice(current, current + itemsToShow);
+
+    // If the slice is too short (we're at the end of the array), append items from the beginning
+    if (items.length < itemsToShow) {
+      items = items.concat(filteredTitles.slice(0, itemsToShow - items.length));
+    }
+
+    return items;
+  })();
 
   return (
     <div className="flex font-heading mx-8">
