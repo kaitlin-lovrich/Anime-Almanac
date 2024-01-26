@@ -217,6 +217,32 @@ export default function TitleList({ titles }: TitleListProps) {
 //     });
 //   };
 
+//   const showPrevItems = () => {
+//     setCurrent((prevCurrent) => {
+//       // If the current index is 0, do not change it
+//       if (prevCurrent === 0) {
+//         return prevCurrent;
+//       }
+
+//       // Calculate the new index for showing previous items
+//       let newIndex = prevCurrent - itemsToShow;
+
+//       // Check if the new index is negative
+//       if (newIndex < 0) {
+//         // If negative, wrap around to the end of the list
+//         newIndex =
+//           filteredTitles.length - Math.abs(newIndex % filteredTitles.length);
+
+//         // Handle the case when the absolute value of newIndex is a multiple of filteredTitles.length
+//         if (newIndex === filteredTitles.length) {
+//           newIndex = 0;
+//         }
+//       }
+
+//       return newIndex;
+//     });
+//   };
+
 //   const filteredTitles = titles.filter((title) => title.title_english != null);
 
 //   const visibleTitles = (() => {
@@ -247,11 +273,10 @@ export default function TitleList({ titles }: TitleListProps) {
 //     if (swipeDistance > threshold) {
 //       // Swiped left
 //       showNextItems();
+//     } else if (swipeDistance < -threshold) {
+//       // Swiped right
+//       showPrevItems(); // You need to implement this function similar to showNextItems
 //     }
-//     // } else if (swipeDistance < -threshold) {
-//     //   // Swiped right
-//     //   showPrevItems(); // You need to implement this function similar to showNextItems
-//     // }
 
 //     // Reset
 //     setTouchStart(null);
@@ -264,6 +289,13 @@ export default function TitleList({ titles }: TitleListProps) {
 //       onTouchStart={handleTouchStart}
 //       onTouchMove={handleTouchMove}
 //       onTouchEnd={handleTouchEnd}>
+//       {current > 0 && (
+//         <div
+//           onClick={showPrevItems}
+//           className="flex text-[rgb(176,176,176)] text-5xl cursor-pointer items-center">
+//           <FaChevronLeft />
+//         </div>
+//       )}
 //       {visibleTitles.map((title) => (
 //         <div key={title.mal_id}>
 //           <TitleCard title={title} />
