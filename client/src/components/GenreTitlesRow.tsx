@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { GenreType, Title, TitleData } from '../lib/dataTypes';
 import Genre from './Genre';
 import TitleList from './TitleList';
+import Loading from './Loading';
 
 type GenreTitleRowProps = {
   genre: GenreType;
@@ -10,9 +11,11 @@ type GenreTitleRowProps = {
 export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   const [genreTitles, setGenreTitles] = useState<TitleData[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true; // tracks mounted state
+    setIsLoading(true);
     async function loadTitles() {
       try {
         const response = await fetch(
@@ -45,6 +48,8 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
             setError(err.message);
           }
         }
+      } finally {
+        setIsLoading(false);
       }
     }
     loadTitles();
@@ -60,8 +65,12 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
     return <div>Error: {error}</div>;
   }
 
+  if (isLoading || genreTitles.length === 0) {
+    return <Loading />;
+  }
+
   return (
-    <div className="genre-title-row">
+    <div className="genre-title-row mt-8">
       <Genre key={genre.mal_id} genre={genre.name} />
       <TitleList titles={genreTitles} />
     </div>
