@@ -82,23 +82,29 @@ export default function TitleList({ titles }: TitleListProps) {
   })();
 
   return (
-    <div className="flex font-heading mx-8">
-      {current > 0 && (
-        <div
-          onClick={showPrevItems}
-          className="flex text-[rgb(176,176,176)] text-5xl cursor-pointer items-center">
-          <FaChevronLeft />
+    <div>
+      <div className="flex font-heading mx-8">
+        {current > 0 && (
+          <div className="relative">
+            <div
+              onClick={showPrevItems}
+              className="flex absolute left-[-15px] top-[125px] text-[rgb(176,176,176)] text-6xl cursor-pointer items-center">
+              <FaChevronLeft />
+            </div>
+          </div>
+        )}
+        {visibleTitles.map((title) => (
+          <div key={title.mal_id}>
+            <TitleCard title={title} />
+          </div>
+        ))}
+        <div className="relative">
+          <div
+            onClick={showNextItems}
+            className="flex absolute right-[-15px] top-[125px] text-[rgb(176,176,176)] text-6xl cursor-pointer items-center">
+            <FaChevronRight />
+          </div>
         </div>
-      )}
-      {visibleTitles.map((title) => (
-        <div key={title.mal_id}>
-          <TitleCard title={title} />
-        </div>
-      ))}
-      <div
-        onClick={showNextItems}
-        className="flex text-[rgb(176,176,176)] text-5xl cursor-pointer items-center">
-        <FaChevronRight />
       </div>
     </div>
   );
