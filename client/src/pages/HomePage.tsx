@@ -37,7 +37,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-32">
       {genres.map((genre) => (
         <GenreTitlesRow key={genre.mal_id} genre={genre} />
       ))}

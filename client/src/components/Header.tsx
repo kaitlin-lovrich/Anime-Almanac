@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Header() {
   return (
     <>
-      <nav className="flex justify-between mb-10 bg-custom-gradient-2 shadow-custom-drop">
+      <nav className="flex fixed top-0 w-full justify-between bg-custom-gradient-2 shadow-custom-drop">
         <Link to="/" className="link-logo">
           <div className="w-72 m-2">
             <img
@@ -17,6 +17,7 @@ export default function Header() {
           <h2>Search</h2>
         </div>
       </nav>
+
       <Outlet />
     </>
   );
