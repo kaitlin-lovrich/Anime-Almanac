@@ -1,7 +1,7 @@
 # [Anime-Almanac]([[https://github.com/kaitlin-lovrich/Grocery-Guru](http://grocery-guru-dev.us-west-2.elasticbeanstalk.com/)](http://grocery-guru-dev.us-west-2.elasticbeanstalk.com/grocery-list/1))
 
 
-## Overview
+### Overview
 Anime-Almanac, a dynamic web application for weebs who want to browse anime, view trailers, and save their favorite titles to a personalized collection
 
 <!--
