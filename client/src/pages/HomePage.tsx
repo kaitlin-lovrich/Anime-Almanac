@@ -80,9 +80,8 @@ export default function HomePage() {
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-      <div ref={loadingRef}>
-        <Loading />
-      </div>
+      <Loading />
+      <div ref={loadingRef}></div>
     </div>
   );
 }
