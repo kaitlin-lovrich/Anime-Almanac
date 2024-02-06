@@ -16,3 +16,19 @@ export const genreData: GenreType[] = [
   { mal_id: 37, name: 'Supernatural' },
   { mal_id: 41, name: 'Suspense' },
 ];
+
+export const genresToLoad = [
+  'Action',
+  'Award Winning',
+  'Adventure',
+  'Comedy',
+  'Drama',
+  'Fantasy',
+  'Horror',
+  'Mystery',
+  'Romance',
+  'Sci-Fi',
+  'Slice of Life',
+  'Supernatural',
+  'Suspense',
+];
