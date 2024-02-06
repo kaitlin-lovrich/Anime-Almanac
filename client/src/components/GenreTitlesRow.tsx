@@ -5,7 +5,7 @@ import TitleList from './TitleList';
 import Loading from './Loading';
 
 type GenreTitleRowProps = {
-  genre: GenreType;
+  genre: GenreType | undefined;
 };
 
 export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
@@ -19,7 +19,9 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
     async function loadTitles() {
       try {
         const response = await fetch(
-          `https://api.jikan.moe/v4/anime?order_by=popularity&genres=${genre.mal_id}`
+          `https://api.jikan.moe/v4/anime?order_by=popularity&genres=${
+            genre!.mal_id
+          }`
         );
         // Check for response.ok to handle HTTP errors
         if (!response.ok)
@@ -29,8 +31,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
         try {
           // Try parsing the JSON response
           titlesArray = await response.json();
-          console.log('titlesArray', titlesArray);
-          console.log('titlesArray.data', titlesArray.data);
+          // console.log('titlesArray.data', titlesArray.data); ////////////////////////
         } catch (jsonError) {
           // Catch JSON parsing errors
           throw new Error('Error parsing JSON response');
@@ -42,7 +43,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
         if (err instanceof Error) {
           // Handle both fetch and JSON parsing errors
           console.error(
-            `Error fetching titles for ${genre.name}. Error: ${err}`
+            `Error fetching titles for ${genre!.name}. Error: ${err}`
           );
           if (isMounted) {
             setError(err.message);
@@ -58,7 +59,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
     return () => {
       isMounted = false;
     };
-  }, [genre.mal_id, genre.name]);
+  }, [genre!, genre!.mal_id, genre!.name]);
 
   // Render error message if it exists
   if (error) {
@@ -71,7 +72,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
 
   return (
     <div className="genre-title-row mt-8">
-      <Genre key={genre.mal_id} genre={genre.name} />
+      <Genre key={genre!.mal_id} genre={genre!.name} />
       <TitleList titles={genreTitles} />
     </div>
   );
