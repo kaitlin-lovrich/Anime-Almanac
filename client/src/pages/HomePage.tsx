@@ -1,64 +1,87 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
-import { genreData } from '../lib/genreData';
+import { genreData, genresToLoad } from '../lib/genreData';
 
 export default function HomePage() {
-  const [genres, setGenres] = useState<GenreType[]>([]);
+  const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
+  const [loadedGenresCount, setLoadedGenresCount] = useState(2);
+  const loadingRef = useRef(null);
 
+  // useEffect to load the initial genres
   useEffect(() => {
-    // Array to hold all timeout IDs
-    const timerIds: (number | NodeJS.Timeout)[] = [];
+    const firstGenre = genreData.find(
+      (genre) => genre.name === genresToLoad[0]
+    );
+    if (firstGenre) setGenres([firstGenre]);
 
-    async function loadHomePage() {
+    const timerId = setTimeout(() => {
+      const secondGenre = genreData.find(
+        (genre) => genre.name === genresToLoad[1]
+      );
+      if (secondGenre) {
+        setGenres((prevGenres) => [...prevGenres, secondGenre]);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timerId);
+  }, []); // Empty dependency array, runs only once on mount
+
+  // useEffect for intersection observer to load more genres
+  useEffect(() => {
+    let timerId: number | NodeJS.Timeout;
+    async function loadMoreGenres() {
       try {
-        const initialGenres = [
-          'Action',
-          'Award Winning',
-          'Adventure',
-          // 'Comedy',
-          // 'Drama',
-          // 'Fantasy',
-          // 'Horror',
-          // 'Mystery',
-          // 'Romance',
-          // 'Sci-Fi',
-          // 'Slice of Life',
-          // 'Supernatural',
-          // 'Suspense',
-        ];
-        // Immediately set the first genre to avoid rate limit.
-        const firstGenre = genreData.find(
-          (genre) => genre.name === initialGenres[0]
+        // Logic for loading genres
+        const nextGenre = genresToLoad.slice(
+          loadedGenresCount,
+          loadedGenresCount + 1
         );
-        if (firstGenre) setGenres([firstGenre]); // If firstGenre found, set it
-
-        // Set second genre after a delay
-        const timerId1 = setTimeout(() => {
-          const secondGenre = genreData.find(
-            (genre) => genre.name === initialGenres[1]
+        const nextGenreName = nextGenre.join();
+        timerId = setTimeout(() => {
+          const nextGenreToLoad = genreData.find(
+            (genre) => genre.name === nextGenreName
           );
-          if (secondGenre) {
-            setGenres((prevGenres) => [...prevGenres, secondGenre]);
+          if (nextGenreToLoad) {
+            setGenres((prevGenres) => [...prevGenres, nextGenreToLoad]);
+            setLoadedGenresCount((count) => count + 1);
           }
-        }, 1000); // Delay of 1 second for the second genre
-        timerIds.push(timerId1);
+        }, 3000);
       } catch (err) {
-        console.error(`Error loading home page: ${err}`);
+        console.error(`Error loading more genres: ${err}`);
       }
     }
-    loadHomePage();
-    // Cleanup function to clear all timeouts
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && loadedGenresCount < genresToLoad.length) {
+          loadMoreGenres();
+        }
+      },
+      {
+        rootMargin: '300px',
+      }
+    );
+
+    if (loadingRef.current) {
+      observer.observe(loadingRef.current);
+    }
+
     return () => {
-      timerIds.forEach((timerId) => clearTimeout(timerId as number));
+      clearTimeout(timerId);
+      observer.disconnect();
     };
-  }, []);
+  }, [loadedGenresCount]);
 
   return (
     <div className="flex flex-wrap justify-center mt-28">
       {genres.map((genre) => (
-        <GenreTitlesRow key={genre.mal_id} genre={genre} />
+        <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
+      <div ref={loadingRef} className="w-full text-center py-8">
+        Loading more...
+      </div>
     </div>
   );
 }
