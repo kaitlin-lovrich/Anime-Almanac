@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
+import Loading from '../components/Loading';
 
 export default function HomePage() {
   const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
@@ -75,12 +76,12 @@ export default function HomePage() {
   }, [loadedGenresCount]);
 
   return (
-    <div className="flex flex-wrap justify-center mt-28">
+    <div className="flex flex-wrap justify-center mt-28 mx-auto w-1/2">
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-      <div ref={loadingRef} className="w-full text-center py-8">
-        Loading more...
+      <div ref={loadingRef}>
+        <Loading />
       </div>
     </div>
   );
