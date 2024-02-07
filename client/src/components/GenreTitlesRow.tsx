@@ -3,6 +3,7 @@ import { GenreType, Title, TitleData } from '../lib/dataTypes';
 import Genre from './Genre';
 import TitleList from './TitleList';
 import Loading from './Loading';
+import ErrorMessage from './ErrorMessage';
 
 type GenreTitleRowProps = {
   genre: GenreType | undefined;
@@ -10,6 +11,7 @@ type GenreTitleRowProps = {
 
 export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   const [genreTitles, setGenreTitles] = useState<TitleData[]>([]);
+  const [itemsToShow, setItemsToShow] = useState(6); // default number of items
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,17 +25,14 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
             genre!.mal_id
           }`
         );
-        // Check for response.ok to handle HTTP errors
         if (!response.ok)
           throw new Error(`HTTP error! Status: ${response.status}`);
 
         let titlesArray: Title;
         try {
-          // Try parsing the JSON response
           titlesArray = await response.json();
-          // console.log('titlesArray.data', titlesArray.data); ////////////////////////
+          // console.log('titlesArray.data', titlesArray.data);
         } catch (jsonError) {
-          // Catch JSON parsing errors
           throw new Error('Error parsing JSON response');
         }
 
@@ -63,17 +62,23 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
 
   // Render error message if it exists
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorMessage error={error} />;
   }
 
   if (isLoading || genreTitles.length === 0) {
-    return <Loading />;
+    return (
+      <Loading itemsToShow={itemsToShow} setItemsToShow={setItemsToShow} />
+    );
   }
 
   return (
     <div className="genre-title-row mt-8">
       <Genre key={genre!.mal_id} genre={genre!.name} />
-      <TitleList titles={genreTitles} />
+      <TitleList
+        titles={genreTitles}
+        itemsToShow={itemsToShow}
+        setItemsToShow={setItemsToShow}
+      />
     </div>
   );
 }

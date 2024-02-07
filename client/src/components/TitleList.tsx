@@ -5,11 +5,16 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
 type TitleListProps = {
   titles: TitleData[];
+  itemsToShow: number;
+  setItemsToShow: (n: number) => void;
 };
-// success code
-export default function TitleList({ titles }: TitleListProps) {
+
+export default function TitleList({
+  titles,
+  itemsToShow,
+  setItemsToShow,
+}: TitleListProps) {
   const [current, setCurrent] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState(6); // default number of items
 
   const updateItemsToShow = () => {
     const width = window.innerWidth;
@@ -25,7 +30,7 @@ export default function TitleList({ titles }: TitleListProps) {
       setItemsToShow(6);
     }
   };
-
+  console.log('itemsToShow in TitleList component:', itemsToShow);
   useEffect(() => {
     window.addEventListener('resize', updateItemsToShow);
     updateItemsToShow();

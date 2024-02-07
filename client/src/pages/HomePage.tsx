@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 
 export default function HomePage() {
   const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
@@ -47,7 +47,7 @@ export default function HomePage() {
             setGenres((prevGenres) => [...prevGenres, nextGenreToLoad]);
             setLoadedGenresCount((count) => count + 1);
           }
-        }, 3000);
+        }, 3500);
       } catch (err) {
         console.error(`Error loading more genres: ${err}`);
       }
@@ -61,7 +61,7 @@ export default function HomePage() {
         }
       },
       {
-        rootMargin: '300px',
+        rootMargin: '50px',
       }
     );
 
@@ -76,11 +76,11 @@ export default function HomePage() {
   }, [loadedGenresCount]);
 
   return (
-    <div className="flex flex-wrap justify-center mt-28 mx-auto w-1/2">
+    <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-      <Loading />
+
       <div ref={loadingRef}></div>
     </div>
   );
