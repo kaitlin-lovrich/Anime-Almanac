@@ -6,3 +6,18 @@
   -webkit-text-stroke: 1px rgb(229, 229, 229);
   color: rgb(17, 109, 110);
 }
+
+.loading-item {
+  background-color: rgba(78, 54, 54, 0.85); /* Initial opacity */
+  animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
+}
+
+@keyframes fadeInOut {
+  0% {
+    background-color: rgba(78, 54, 54); /* Start with high opacity */
+  }
+
+  100% {
+    background-color: rgba(78, 54, 54, 0.4); /* End with low opacity */
+  }
+}

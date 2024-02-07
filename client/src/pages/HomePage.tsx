@@ -3,11 +3,11 @@ import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
 import Loading from '../components/Loading';
-// import Loading from '../components/Loading';
 
 export default function HomePage() {
   const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
   const [loadedGenresCount, setLoadedGenresCount] = useState(2);
+  const [lastLoadedGenre, setLastLoadedGenre] = useState<string | null>(null);
   const loadingRef = useRef(null);
 
   // useEffect to load the initial genres
@@ -15,7 +15,10 @@ export default function HomePage() {
     const firstGenre = genreData.find(
       (genre) => genre.name === genresToLoad[0]
     );
-    if (firstGenre) setGenres([firstGenre]);
+    if (firstGenre) {
+      setGenres([firstGenre]);
+      setLastLoadedGenre(firstGenre.name);
+    }
 
     const timerId = setTimeout(() => {
       const secondGenre = genreData.find(
@@ -23,8 +26,9 @@ export default function HomePage() {
       );
       if (secondGenre) {
         setGenres((prevGenres) => [...prevGenres, secondGenre]);
+        setLastLoadedGenre(secondGenre.name);
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timerId);
   }, []); // Empty dependency array, runs only once on mount
@@ -47,6 +51,8 @@ export default function HomePage() {
           if (nextGenreToLoad) {
             setGenres((prevGenres) => [...prevGenres, nextGenreToLoad]);
             setLoadedGenresCount((count) => count + 1);
+            setLastLoadedGenre(nextGenreName);
+            console.log(nextGenreName);
           }
         }, 3500);
       } catch (err) {
@@ -62,7 +68,7 @@ export default function HomePage() {
         }
       },
       {
-        rootMargin: '50px',
+        rootMargin: '290px',
       }
     );
 
@@ -81,7 +87,7 @@ export default function HomePage() {
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-      <Loading />
+      {lastLoadedGenre !== 'Suspense' && <Loading />}
       <div ref={loadingRef}></div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function TitleList({ titles }: TitleListProps) {
   const [current, setCurrent] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(6);
 
-  const updateItemsToShow = () => {
+  function updateItemsToShow() {
     const width = window.innerWidth;
     if (width <= 640) {
       setItemsToShow(2);
@@ -24,8 +24,8 @@ export default function TitleList({ titles }: TitleListProps) {
     } else {
       setItemsToShow(6);
     }
-  };
-  console.log('itemsToShow in TitleList component:', itemsToShow);
+  }
+
   useEffect(() => {
     window.addEventListener('resize', updateItemsToShow);
     updateItemsToShow();
