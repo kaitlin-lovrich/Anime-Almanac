@@ -5,16 +5,11 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
 type TitleListProps = {
   titles: TitleData[];
-  itemsToShow: number;
-  setItemsToShow: (n: number) => void;
 };
 
-export default function TitleList({
-  titles,
-  itemsToShow,
-  setItemsToShow,
-}: TitleListProps) {
+export default function TitleList({ titles }: TitleListProps) {
   const [current, setCurrent] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(6);
 
   const updateItemsToShow = () => {
     const width = window.innerWidth;
@@ -39,52 +34,48 @@ export default function TitleList({
     };
   }, []);
 
-  const showNextItems = () => {
+  function showNextItems() {
     setCurrent((prevCurrent) => {
       // Calculate next index, wrapping around to the beginning if needed
       return (prevCurrent + itemsToShow) % filteredTitles.length;
     });
-  };
+  }
 
-  const showPrevItems = () => {
+  function showPrevItems() {
     setCurrent((prevCurrent) => {
       // If the current index is 0, do not change it
       if (prevCurrent === 0) {
         return prevCurrent;
       }
-
       // Calculate the new index for showing previous items
       let newIndex = prevCurrent - itemsToShow;
-
       // Check if the new index is negative
       if (newIndex < 0) {
         // If negative, wrap around to the end of the list
         newIndex =
           filteredTitles.length - Math.abs(newIndex % filteredTitles.length);
-
         // Handle the case when the absolute value of newIndex is a multiple of filteredTitles.length
         if (newIndex === filteredTitles.length) {
           newIndex = 0;
         }
       }
-
       return newIndex;
     });
-  };
+  }
 
-  const filteredTitles = titles.filter((title) => title.title_english != null);
+  const filteredTitles = titles.filter((title) => title.title_english !== null);
 
-  const visibleTitles = (() => {
+  function getVisibleTitles() {
     // Get a slice of titles starting from 'current'
     let items = filteredTitles.slice(current, current + itemsToShow);
-
     // If the slice is too short (we're at the end of the array), append items from the beginning
     if (items.length < itemsToShow) {
       items = items.concat(filteredTitles.slice(0, itemsToShow - items.length));
     }
-
     return items;
-  })();
+  }
+
+  const visibleTitles = getVisibleTitles();
 
   return (
     <div>

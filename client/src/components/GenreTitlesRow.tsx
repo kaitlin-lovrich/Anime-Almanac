@@ -11,7 +11,6 @@ type GenreTitleRowProps = {
 
 export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   const [genreTitles, setGenreTitles] = useState<TitleData[]>([]);
-  const [itemsToShow, setItemsToShow] = useState(6); // default number of items
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,19 +65,13 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   }
 
   if (isLoading || genreTitles.length === 0) {
-    return (
-      <Loading itemsToShow={itemsToShow} setItemsToShow={setItemsToShow} />
-    );
+    return <Loading />;
   }
 
   return (
     <div className="genre-title-row mt-8">
       <Genre key={genre!.mal_id} genre={genre!.name} />
-      <TitleList
-        titles={genreTitles}
-        itemsToShow={itemsToShow}
-        setItemsToShow={setItemsToShow}
-      />
+      <TitleList titles={genreTitles} />
     </div>
   );
 }

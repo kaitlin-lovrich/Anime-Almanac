@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-type LoadingProps = {
-  itemsToShow: number;
-  setItemsToShow: (n: number) => void;
-};
+export default function Loading() {
+  const [itemsToShow, setItemsToShow] = useState(6);
 
-export default function Loading({ itemsToShow, setItemsToShow }: LoadingProps) {
-  const updateItemsToShow = () => {
+  function updateItemsToShow() {
     const width = window.innerWidth;
     if (width <= 640) {
       setItemsToShow(2);
@@ -19,7 +16,7 @@ export default function Loading({ itemsToShow, setItemsToShow }: LoadingProps) {
     } else {
       setItemsToShow(6);
     }
-  };
+  }
   useEffect(() => {
     window.addEventListener('resize', updateItemsToShow);
     updateItemsToShow();
@@ -34,12 +31,14 @@ export default function Loading({ itemsToShow, setItemsToShow }: LoadingProps) {
 
   return (
     <div className="flex justify-evenly flex-wrap">
-      {/* Render the inner-most div for each item in loadingItems */}
-      {loadingItems.map((item) => (
-        <div key={item} className="flex mb-24">
-          <div className="bg-[rgba(78,54,54,0.85)] mx-2 my-24 h-72 w-44 shadow-custom-inset rounded-md"></div>
-        </div>
-      ))}
+      <div className="flex">
+        {/* Render the inner-most div for each item in loadingItems */}
+        {loadingItems.map((item) => (
+          <div key={item} className="flex">
+            <div className="bg-[rgba(78,54,54,0.85)] mx-2 mt-24 h-72 w-44 shadow-custom-inset rounded-md"></div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

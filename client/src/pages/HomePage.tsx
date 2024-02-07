@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
+import Loading from '../components/Loading';
 // import Loading from '../components/Loading';
 
 export default function HomePage() {
@@ -80,7 +81,7 @@ export default function HomePage() {
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-
+      <Loading />
       <div ref={loadingRef}></div>
     </div>
   );
