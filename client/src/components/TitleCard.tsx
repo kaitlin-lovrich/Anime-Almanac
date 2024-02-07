@@ -5,6 +5,15 @@ type TitleCardProps = {
 };
 
 export default function TitleCard({ title }: TitleCardProps) {
+  function shortenTitle(title: string) {
+    const maxLength = 28;
+    if (title.length <= maxLength) {
+      return title;
+    } else {
+      return title.substring(0, maxLength) + '...';
+    }
+  }
+
   return (
     <div>
       <div className="w-44 mx-2">
@@ -16,7 +25,7 @@ export default function TitleCard({ title }: TitleCardProps) {
       </div>
       <div className="bg-[rgba(78,54,54,0.85)] mx-2 h-24 shadow-custom-inset rounded-b-md ">
         <p className="px-4 py-2 w-40 cursor-pointer text-[rgb(176,176,176)] tracking-wider">
-          {title.title_english}
+          {shortenTitle(title.title_english)}
         </p>
       </div>
     </div>
