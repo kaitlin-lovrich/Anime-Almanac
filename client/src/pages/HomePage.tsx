@@ -2,10 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { type GenreType } from '../lib/dataTypes';
 import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
+import Loading from '../components/Loading';
 
 export default function HomePage() {
   const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
   const [loadedGenresCount, setLoadedGenresCount] = useState(2);
+  const [lastLoadedGenre, setLastLoadedGenre] = useState<string | null>(null);
   const loadingRef = useRef(null);
 
   // useEffect to load the initial genres
@@ -13,7 +15,10 @@ export default function HomePage() {
     const firstGenre = genreData.find(
       (genre) => genre.name === genresToLoad[0]
     );
-    if (firstGenre) setGenres([firstGenre]);
+    if (firstGenre) {
+      setGenres([firstGenre]);
+      setLastLoadedGenre(firstGenre.name);
+    }
 
     const timerId = setTimeout(() => {
       const secondGenre = genreData.find(
@@ -21,8 +26,9 @@ export default function HomePage() {
       );
       if (secondGenre) {
         setGenres((prevGenres) => [...prevGenres, secondGenre]);
+        setLastLoadedGenre(secondGenre.name);
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timerId);
   }, []); // Empty dependency array, runs only once on mount
@@ -45,8 +51,10 @@ export default function HomePage() {
           if (nextGenreToLoad) {
             setGenres((prevGenres) => [...prevGenres, nextGenreToLoad]);
             setLoadedGenresCount((count) => count + 1);
+            setLastLoadedGenre(nextGenreName);
+            console.log(nextGenreName);
           }
-        }, 3000);
+        }, 3500);
       } catch (err) {
         console.error(`Error loading more genres: ${err}`);
       }
@@ -60,7 +68,7 @@ export default function HomePage() {
         }
       },
       {
-        rootMargin: '300px',
+        rootMargin: '290px',
       }
     );
 
@@ -75,13 +83,12 @@ export default function HomePage() {
   }, [loadedGenresCount]);
 
   return (
-    <div className="flex flex-wrap justify-center mt-28">
+    <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
       {genres.map((genre) => (
         <GenreTitlesRow key={genre!.mal_id} genre={genre} />
       ))}
-      <div ref={loadingRef} className="w-full text-center py-8">
-        Loading more...
-      </div>
+      {lastLoadedGenre !== 'Suspense' && <Loading />}
+      <div ref={loadingRef}></div>
     </div>
   );
 }

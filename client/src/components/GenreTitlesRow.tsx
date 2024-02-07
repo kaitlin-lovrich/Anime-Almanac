@@ -3,6 +3,7 @@ import { GenreType, Title, TitleData } from '../lib/dataTypes';
 import Genre from './Genre';
 import TitleList from './TitleList';
 import Loading from './Loading';
+import ErrorMessage from './ErrorMessage';
 
 type GenreTitleRowProps = {
   genre: GenreType | undefined;
@@ -23,17 +24,14 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
             genre!.mal_id
           }`
         );
-        // Check for response.ok to handle HTTP errors
         if (!response.ok)
           throw new Error(`HTTP error! Status: ${response.status}`);
 
         let titlesArray: Title;
         try {
-          // Try parsing the JSON response
           titlesArray = await response.json();
-          // console.log('titlesArray.data', titlesArray.data); ////////////////////////
+          // console.log('titlesArray.data', titlesArray.data);
         } catch (jsonError) {
-          // Catch JSON parsing errors
           throw new Error('Error parsing JSON response');
         }
 
@@ -63,7 +61,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
 
   // Render error message if it exists
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorMessage error={error} />;
   }
 
   if (isLoading || genreTitles.length === 0) {
