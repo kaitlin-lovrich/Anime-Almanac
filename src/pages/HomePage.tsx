@@ -4,6 +4,7 @@ import GenreTitlesRow from '../components/GenreTitlesRow';
 import { genreData, genresToLoad } from '../lib/genreData';
 import Loading from '../components/Loading';
 
+
 export default function HomePage() {
   const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
   const [loadedGenresCount, setLoadedGenresCount] = useState(2);
