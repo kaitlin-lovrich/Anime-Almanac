@@ -5,7 +5,7 @@ import Header from './components/Header';
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Header />}>
+      <Route path="/anime-almanac/" element={<Header />}>
         <Route index element={<HomePage />} />
       </Route>
     </Routes>
