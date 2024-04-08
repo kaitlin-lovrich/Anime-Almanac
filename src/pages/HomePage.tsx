@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import { type GenreType } from "../lib/dataTypes";
-import GenreTitlesRow from "../components/GenreTitlesRow";
-import { genreData, genresToLoad } from "../lib/genreData";
-import Loading from "../components/Loading";
+import { type GenreType } from "../lib/dataTypes.ts";
+import GenreTitlesRow from "../components/GenreTitlesRow.tsx";
+import { genreData, genresToLoad } from "../lib/genreData.ts";
+import Loading from "../components/Loading.tsx";
 
 export default function HomePage() {
     const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);

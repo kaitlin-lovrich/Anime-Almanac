@@ -1,4 +1,4 @@
-import { TitleData } from "../lib/dataTypes";
+import { TitleData } from "../lib/dataTypes.ts";
 
 type TitleCardProps = {
     title: TitleData;

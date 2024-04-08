@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GenreType, Title, TitleData } from "../lib/dataTypes";
-import Genre from "./Genre";
-import TitleList from "./TitleList";
-import Loading from "./Loading";
-import ErrorMessage from "./ErrorMessage";
+import { GenreType, Title, TitleData } from "../lib/dataTypes.ts";
+import Genre from "./Genre.tsx";
+import TitleList from "./TitleList.tsx";
+import Loading from "./Loading.tsx";
+import ErrorMessage from "./ErrorMessage.tsx";
 
 type GenreTitleRowProps = {
     genre: GenreType | undefined;

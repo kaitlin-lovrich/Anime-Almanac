@@ -1,4 +1,4 @@
-import { GenreType } from "./dataTypes";
+import { GenreType } from "./dataTypes.ts";
 
 // GenreData handwritten from the Jikan API to avoid extra request
 export const genreData: GenreType[] = [

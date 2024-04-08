@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TitleData } from "../lib/dataTypes";
-import TitleCard from "./TitleCard";
+import { TitleData } from "../lib/dataTypes.ts";
+import TitleCard from "./TitleCard.tsx";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 type TitleListProps = {
