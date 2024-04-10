@@ -1,9 +1,13 @@
 import { Link, Outlet } from "react-router-dom";
 
-export default function Header() {
+type HeaderProps = {
+    children: React.ReactNode;
+};
+
+export default function Header({ children }: HeaderProps) {
     return (
         <>
-            <nav className="flex fixed top-0 w-full z-50 justify-between bg-custom-gradient-2 shadow-custom-drop">
+            <nav className="flex fixed top-0 w-full z-1 justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
                     <div className="w-72 m-2">
                         <img
@@ -17,7 +21,7 @@ export default function Header() {
                     <h2>Search</h2>
                 </div>
             </nav>
-
+            <div>{children}</div>
             <Outlet />
         </>
     );
