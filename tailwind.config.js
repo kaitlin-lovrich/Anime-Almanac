@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    content: ["./src/**/*.{html,ts,tsx,js,jsx}"],
     theme: {
         fontFamily: {
             heading: ['"Russo One"', "serif"],
