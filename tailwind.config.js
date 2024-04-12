@@ -19,5 +19,5 @@ export default {
     },
     extend: {},
   },
-  plugins: [pseudoElementsPlugin],
+  plugins: [],
 };
