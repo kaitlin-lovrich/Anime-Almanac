@@ -2,13 +2,7 @@ import pseudoElementsPlugin from 'tailwindcss-pseudo-elements';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/pages/**/*.{html,ts,tsx,js,jsx}',
-    './src/components/**/*.{html,ts,tsx,js,jsx}',
-    './src/**/*.{html,ts,tsx,js,jsx}',
-    './index.html',
-    './index.css',
-  ],
+  content: ['./src/**/*.{html,ts,tsx,js,jsx}'],
   theme: {
     fontFamily: {
       heading: ['"Russo One"', 'serif'],
