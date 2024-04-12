@@ -1,5 +1,3 @@
-import pseudoElementsPlugin from 'tailwindcss-pseudo-elements';
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,ts,tsx,js,jsx}'],
@@ -21,5 +19,5 @@ export default {
     },
     extend: {},
   },
-  plugins: [pseudoElementsPlugin],
+  plugins: [],
 };
