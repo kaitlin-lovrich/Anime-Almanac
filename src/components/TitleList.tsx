@@ -5,11 +5,14 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 type TitleListProps = {
     titles: TitleData[];
+    searchListKey?: boolean;
 };
 
-export default function TitleList({ titles }: TitleListProps) {
+export default function TitleList({ titles, searchListKey }: TitleListProps) {
     const [current, setCurrent] = useState(0);
     const [itemsToShow, setItemsToShow] = useState(6);
+
+    console.log("TitleList mounted");
 
     function updateItemsToShow() {
         const width = window.innerWidth;
@@ -77,6 +80,7 @@ export default function TitleList({ titles }: TitleListProps) {
                 filteredTitles.slice(0, itemsToShow - items.length)
             );
         }
+        // console.log("Visible Titles:", items); // Add this line to log visible titles
         return items;
     }
 
@@ -95,11 +99,18 @@ export default function TitleList({ titles }: TitleListProps) {
                         </div>
                     </div>
                 )}
-                {visibleTitles.map((title) => (
-                    <div key={title.mal_id}>
-                        <TitleCard title={title} />
-                    </div>
-                ))}
+                {visibleTitles.map((title, index) => {
+                    const key = searchListKey
+                        ? `${title.mal_id}-search-${title.title_english}-${index}`
+                        : title.mal_id;
+                    // console.log("Generated Key:", key);
+
+                    return (
+                        <div key={key}>
+                            <TitleCard title={title} />
+                        </div>
+                    );
+                })}
                 <div className="relative">
                     <div
                         onClick={showNextItems}
