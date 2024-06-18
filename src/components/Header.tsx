@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 export default function Header() {
     return (
         <>
-            <nav className="flex fixed top-0 w-full z-50 justify-between bg-custom-gradient-2 shadow-custom-drop">
+            <nav className="flex fixed top-0 w-full z-50 justify-center lg:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
                     <div className="w-72 m-2">
                         <img
@@ -12,10 +12,7 @@ export default function Header() {
                         />
                     </div>
                 </Link>
-                <NavButtons />
-                <div>
-                    <h2>Search</h2>
-                </div>
+                <DesktopNavigation />
             </nav>
 
             <Outlet />
@@ -23,10 +20,12 @@ export default function Header() {
     );
 }
 
-function NavButtons() {
+function DesktopNavigation() {
     return (
-        <div className="flex justify-around p-2">
-            <h2 className="text-2xl font-heading text-[#B0B0B0] p-4">Home</h2>
+        <div className="flex justify-around p-2 *:hidden *:lg:block">
+            <h2 className="text-2xl font-heading text-[#B0B0B0] p-4 sm:text-red-200 md:text-green-200 lg:text-red-800 xl:text-yellow-600">
+                Home
+            </h2>
             <h2 className="text-2xl font-heading text-[#B0B0B0] p-4">
                 TV Shows
             </h2>

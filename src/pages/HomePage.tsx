@@ -3,6 +3,7 @@ import { type GenreType } from "../lib/dataTypes";
 import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
+import Footer from "../components/Footer";
 
 export default function HomePage() {
     const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
@@ -89,12 +90,15 @@ export default function HomePage() {
     }, [loadedGenresCount]);
 
     return (
-        <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
-            {genres.map((genre) => (
-                <GenreTitlesRow key={genre!.mal_id} genre={genre} />
-            ))}
-            {lastLoadedGenre !== "Suspense" && <Loading />}
-            <div ref={loadingRef}></div>
-        </div>
+        <>
+            <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
+                {genres.map((genre) => (
+                    <GenreTitlesRow key={genre!.mal_id} genre={genre} />
+                ))}
+                {lastLoadedGenre !== "Suspense" && <Loading />}
+                <div ref={loadingRef}></div>
+            </div>
+            <Footer />
+        </>
     );
 }

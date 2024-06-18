@@ -8,10 +8,14 @@ export default {
             special: ['"Ruslan Display"', "serif"],
         },
         backgroundImage: {
+            "custom-gradient-4":
+                "linear-gradient(rgba(50,30,30), rgb(78,54,54))",
             "custom-gradient-3":
                 "linear-gradient(#4E3636 10%, #775A5A 50%, #4E3636 90%)",
             "custom-gradient-2":
                 "linear-gradient(rgb(78,54,54), rgba(78,54,54,.95))",
+            "custom-gradient-1":
+                "linear-gradient(rgba(78,54,54,.95), rgb(78,54,54))",
         },
         boxShadow: {
             "custom-inset":
