@@ -1,2 +1,2 @@
-# [Popular Anime Viewer](https://anime-almanac.vercel.app/)
+# [Anime Almanac](https://anime-almanac.vercel.app/)
 
