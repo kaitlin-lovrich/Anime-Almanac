@@ -31,3 +31,5 @@ export default function TitleCard({ title }: TitleCardProps) {
     </div>
   );
 }
+
+// Make ttile cards smaller at mobile, and md screen sizes
