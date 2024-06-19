@@ -85,7 +85,7 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
+            <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-1/2">
                 {genres.map((genre) => (
                     <GenreTitlesRow key={genre!.mal_id} genre={genre} />
                 ))}
