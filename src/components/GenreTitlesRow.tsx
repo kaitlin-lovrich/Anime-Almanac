@@ -60,7 +60,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
   }, [genre!, genre!.mal_id, genre!.name]);
 
   // Render error message if it exists
-  if (error) {
+  if (error!) {
     return <ErrorMessage error={error} />;
   }
 
