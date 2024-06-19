@@ -12,6 +12,16 @@
   animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
 }
 
+.multiline-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Number of lines before truncation */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 5.3em; /* Adjust this to fit the number of lines you want */
+  line-height: 1.6em; /* Adjust this to control the spacing between lines */
+}
+
 @keyframes fadeInOut {
   0% {
     background-color: rgba(78, 54, 54); /* Start with high opacity */

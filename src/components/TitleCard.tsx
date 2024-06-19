@@ -1,18 +1,19 @@
 import { TitleData } from '../lib/dataTypes';
+import '../index.css';
 
 type TitleCardProps = {
   title: TitleData;
 };
 
 export default function TitleCard({ title }: TitleCardProps) {
-  function shortenTitle(title: string) {
-    const maxLength = 28;
-    if (title.length <= maxLength) {
-      return title;
-    } else {
-      return title.substring(0, maxLength) + '...';
-    }
-  }
+  // function shortenTitle(title: string) {
+  //   const maxLength = 28;
+  //   if (title.length <= maxLength) {
+  //     return title;
+  //   } else {
+  //     return title.substring(0, maxLength) + '...';
+  //   }
+  // }
 
   return (
     <div>
@@ -24,8 +25,8 @@ export default function TitleCard({ title }: TitleCardProps) {
         />
       </div>
       <div className="bg-[rgba(78,54,54,0.85)] mx-2 h-24 shadow-custom-inset rounded-b-md ">
-        <p className="px-4 py-2 w-40 cursor-pointer text-[rgb(176,176,176)] tracking-wider">
-          {shortenTitle(title.title_english)}
+        <p className="p-2 mx-auto w-40 cursor-pointer text-[rgb(176,176,176)] tracking-wider multiline-truncate h-full">
+          {title.title_english}
         </p>
       </div>
     </div>
