@@ -28,7 +28,7 @@ export default function Header() {
 function DesktopNavigation() {
     return (
         <>
-            <span className="lg:text-red-800 xl:text-yellow-600">Home</span>
+            <span>Home</span>
             <FilterButtons />
             <span>My Favorites</span>
         </>
