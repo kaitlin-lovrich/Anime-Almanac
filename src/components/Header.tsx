@@ -16,7 +16,7 @@ export default function Header() {
                     <DesktopNavigation />
                 </div>
             </nav>
-            <div className="flex lg:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[90%] max-w-[425px] sm:w-[425px] md:w-[65%] md:max-w-[65%]  mt-20 rounded-lg *:text-[#B0B0B0] *:text-2xl *:font-heading *:p-3">
+            <div className="flex lg:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[90%] max-w-[425px] sm:w-[425px] md:w-[65%] md:max-w-[65%]  mt-[6.5rem] rounded-lg *:text-[#B0B0B0] *:text-2xl *:font-heading *:p-3">
                 <FilterButtons />
             </div>
 

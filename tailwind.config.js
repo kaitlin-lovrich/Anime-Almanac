@@ -13,7 +13,7 @@ export default {
             "custom-gradient-4":
                 "linear-gradient(rgba(50,30,30), rgb(78,54,54))",
             "custom-gradient-3":
-                "linear-gradient(rgb(50,30,30) 20%, rgb(119,90,90) 50%, rgb(50,30,30) 80%)",
+                "linear-gradient(rgb(50,30,30) 16%, rgb(119,90,90) 50%, rgb(50,30,30) 84%)",
             "custom-gradient-2":
                 "linear-gradient(rgb(78,54,54), rgba(78,54,54,.95))",
             "custom-gradient-1":
