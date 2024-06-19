@@ -57,7 +57,7 @@ export default function GenreTitlesRow({ genre }: GenreTitleRowProps) {
     return () => {
       isMounted = false;
     };
-  }, [genre!, genre!.mal_id, genre!.name]);
+  }, [genre]);
 
   // Render error message if it exists
   if (error) {
