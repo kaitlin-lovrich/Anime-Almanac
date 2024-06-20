@@ -3,9 +3,9 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Header() {
     return (
         <>
-            <nav className="flex fixed top-0 w-full z-50 justify-center lg:justify-between bg-custom-gradient-2 shadow-custom-drop">
+            <nav className="flex fixed top-0 w-full z-50 lg:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
-                    <div className="w-56 sm:w-72 m-1 sm:m-2">
+                    <div className="w-48 sm:w-72 m-1 sm:m-2">
                         <img
                             src="Anime-Almanacs-logo.png"
                             className="w-full drop-shadow-md"
