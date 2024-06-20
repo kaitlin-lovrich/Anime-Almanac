@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Header() {
     return (
         <>
-            <nav className="flex fixed top-0 w-full z-50 lg:justify-between bg-custom-gradient-2 shadow-custom-drop">
+            <nav className="flex lg:fixed top-0 w-full z-50 lg:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
                     <div className="w-52 md:w-60 lg:w-72 m-1 lg:m-2">
                         <img
@@ -16,7 +16,7 @@ export default function Header() {
                     <DesktopNavigation />
                 </div>
             </nav>
-            <div className="flex lg:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] md:w-[65%] md:max-w-[375px] mt-[4.5rem] md:mt-[5.5rem] rounded-lg *:text-[#B0B0B0] *:text-lg md:*:text-xl *:font-heading *:p-1.5">
+            <div className="flex lg:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] md:w-[65%] md:max-w-[375px] mt-[1rem] md:mt-[1.5rem] rounded-lg *:text-[#B0B0B0] *:text-lg md:*:text-xl *:font-heading *:p-1.5">
                 <FilterButtons />
             </div>
 
