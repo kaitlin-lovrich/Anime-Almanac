@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-stroke {
+.text-stroke-blue {
   -webkit-text-stroke: 1px rgb(229, 229, 229);
   color: rgb(17, 109, 110);
+}
+
+.text-stroke-red {
+  -webkit-text-stroke: 1px rgb(229, 229, 229);
+  color: rgb(205, 24, 24);
 }
 
 .loading-item {

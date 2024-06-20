@@ -15,12 +15,12 @@ export default function Header() {
                         />
                     </div>
                 </Link>
-                <div className="md:flex hidden justify-around items-center p-2 *:text-[#B0B0B0] md:*:text-xl lg:*:text-2xl *:font-heading *:p-4">
+                <div className="md:flex hidden justify-around items-center p-2 text-custom-gray md:*:text-xl lg:*:text-2xl *:font-heading *:p-4 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
                     <DesktopNavigation />
                 </div>
             </nav>
-            <div className="flex md:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] mt-[1rem] rounded-lg *:text-[#B0B0B0] *:text-lg *:font-heading *:p-1.5">
-                <FilterButtons />
+            <div className="flex md:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] mt-[1rem] rounded-lg text-custom-gray *:text-lg *:font-heading *:p-1.5 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
+                <FilterOptions />
             </div>
 
       <Outlet />
@@ -31,12 +31,13 @@ export default function Header() {
 
 
 function DesktopNavigation() {
-    const { setFilter } = useContext(AppContext);
+    const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
-            <button onClick={() => setFilter(null)}>Home</button>
-            <FilterButtons />
+            <span onClick={() => setFilter(null)} className={filter === null ? 'text-custom-white' : ''}
+               >Home</span>
+            <FilterOptions />
             <span>My Favorites</span>
         </>
     );
@@ -44,13 +45,13 @@ function DesktopNavigation() {
 
 
 
-function FilterButtons() {
-    const { setFilter } = useContext(AppContext);
+function FilterOptions() {
+    const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
-            <button onClick={() => setFilter('TV Shows')}>TV Shows</button>
-            <button onClick={() => setFilter('Movies')}>Movies</button>
+            <span onClick={() => setFilter('TV Shows')} className={filter === "TV Shows" ? 'text-custom-white' : ''} >TV Shows</span>
+            <span onClick={() => setFilter('Movies')} className={filter === "Movies" ? 'text-custom-white' : ''} >Movies</span>
         </>
     );
 }
