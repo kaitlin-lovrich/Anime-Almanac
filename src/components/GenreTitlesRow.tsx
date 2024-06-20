@@ -72,7 +72,7 @@ export default function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-4 sm:mt-6 md:mt-8">
       <Genre key={genre!.mal_id} genre={genre!.name} />
       <TitleList titles={genreTitles} />
     </div>
