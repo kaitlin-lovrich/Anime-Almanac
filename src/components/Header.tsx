@@ -8,7 +8,7 @@ export default function Header() {
         <>
             <nav className="flex lg:fixed top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
-                    <div className="w-52 md:w-60 lg:w-72 m-1 lg:m-2">
+                    <div className="w-60 lg:w-72 m-1 lg:m-2">
                         <img
                             src="Anime-Almanacs-logo.png"
                             className="w-full drop-shadow-md"
