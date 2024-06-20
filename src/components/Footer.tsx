@@ -9,7 +9,7 @@ export default function Footer() {
         <>
             <nav className="md:hidden flex fixed bottom-0 w-full z-50 justify-center bg-custom-gradient-1 shadow-custom-drop">
                 <div className="p-1.5 w-[80%] max-w-[400px] sm:max-w-[425px] md:w-[65%] md:max-w-[65%]">
-                    <div className="flex justify-center bg-custom-gradient-4 rounded-lg text-custom-gray *:size-11 *:px-1.5 *:mx-4 sm:*:mx-6 *:drop-shadow-xl *:cursor-pointer hover:*:text-custom-white hover:*:scale-110 active:*:scale-110 *:duration-300">
+                    <div className="flex justify-center bg-custom-gradient-4 rounded-lg text-custom-gray *:size-14 *:px-1.5 *:mx-4 sm:*:mx-6 *:drop-shadow-xl *:cursor-pointer hover:*:text-custom-white hover:*:scale-110 active:*:scale-110 *:duration-300">
                         <MobileNavigation />
                     </div>
                 </div>
