@@ -79,7 +79,7 @@ export default function TitleList({ titles }: TitleListProps) {
 
   return (
     <div>
-      <div className="flex font-heading mx-8">
+      <div className="flex font-heading">
         {current > 0 && (
           <div className="relative">
             <div
