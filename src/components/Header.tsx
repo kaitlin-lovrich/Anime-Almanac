@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AppContext } from './AppContext';
 
 export default function Header() {
+
     return (
         <>
             <nav className="flex lg:fixed top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
@@ -25,21 +28,29 @@ export default function Header() {
   );
 }
 
+
+
 function DesktopNavigation() {
+    const { setFilter } = useContext(AppContext);
+
     return (
         <>
-            <span>Home</span>
+            <button onClick={() => setFilter(null)}>Home</button>
             <FilterButtons />
             <span>My Favorites</span>
         </>
     );
 }
 
+
+
 function FilterButtons() {
+    const { setFilter } = useContext(AppContext);
+
     return (
         <>
-            <button>TV Shows</button>
-            <button>Movies</button>
+            <button onClick={() => setFilter('TV Shows')}>TV Shows</button>
+            <button onClick={() => setFilter('Movies')}>Movies</button>
         </>
     );
 }
