@@ -33,7 +33,7 @@ export default function Loading() {
       <div className="flex">
         {loadingItems.map((item) => (
           <div key={item} className="flex">
-            <div className="loading-item mx-2 mt-20 lg:mt-24 h-64 md:h-72 lg:h-80 w-36 md:w-40 lg:w-44 shadow-custom-inset rounded-md"></div>
+            <div className="loading-item mx-2 mt-16 md:mt-24 h-64 md:h-72 lg:h-80 w-36 md:w-40 lg:w-44 shadow-custom-inset rounded-md"></div>
           </div>
         ))}
       </div>
