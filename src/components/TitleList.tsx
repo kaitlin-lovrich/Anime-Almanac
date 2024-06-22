@@ -84,7 +84,7 @@ export default function TitleList({ titles }: TitleListProps) {
           <div className="relative">
             <div
               onClick={showPrevItems}
-              className="flex absolute left-[-15px] top-[125px] text-[rgb(176,176,176)] text-6xl cursor-pointer items-center">
+              className="flex absolute items-center left-[-15px] top-[110px] md:top-[125px] text-[rgb(176,176,176)] text-5xl md:text-6xl cursor-pointer hover:text-custom-white hover:scale-110 duration-300">
               <FaChevronLeft />
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function TitleList({ titles }: TitleListProps) {
         <div className="relative">
           <div
             onClick={showNextItems}
-            className="flex absolute right-[-15px] top-[125px] text-[rgb(176,176,176)] text-6xl cursor-pointer items-center">
+            className="flex absolute items-center right-[-15px] top-[110px] md:top-[125px] text-[rgb(176,176,176)] text-5xl md:text-6xl cursor-pointer hover:text-custom-white hover:scale-110 duration-300">
             <FaChevronRight />
           </div>
         </div>
