@@ -1,8 +1,12 @@
-import { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { AppContext } from './AppContext';
+import { useContext } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { AppContext } from "./AppContext";
+import { TitleData } from "../lib/dataTypes";
 
 export default function Header() {
+    const location = useLocation();
+    const title: TitleData = location.state?.title; // Access the passed state
+    console.log(title);
 
     return (
         <>
@@ -19,39 +23,52 @@ export default function Header() {
                     <DesktopNavigation />
                 </div>
             </nav>
-            <div className="flex md:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] mt-[1rem] rounded-lg text-custom-gray *:text-lg *:font-heading *:p-1.5 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
-                <FilterOptions />
-            </div>
+            {title === undefined && (
+                <div className="flex md:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] mt-[1rem] rounded-lg text-custom-gray *:text-lg *:font-heading *:p-1.5 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
+                    <FilterOptions />
+                </div>
+            )}
 
-      <Outlet />
-    </>
-  );
+            <Outlet />
+        </>
+    );
 }
-
-
 
 function DesktopNavigation() {
     const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
-            <span onClick={() => setFilter(null)} className={filter === null ? 'text-custom-white' : ''}
-               >Home</span>
+            <Link
+                to="/"
+                onClick={() => setFilter(null)}
+                className={filter === null ? "text-custom-white" : ""}
+            >
+                <span>Home</span>
+            </Link>
             <FilterOptions />
             <span>My Favorites</span>
         </>
     );
 }
 
-
-
 function FilterOptions() {
     const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
-            <span onClick={() => setFilter('TV Shows')} className={filter === "TV Shows" ? 'text-custom-white' : ''} >TV Shows</span>
-            <span onClick={() => setFilter('Movies')} className={filter === "Movies" ? 'text-custom-white' : ''} >Movies</span>
+            <span
+                onClick={() => setFilter("TV Shows")}
+                className={filter === "TV Shows" ? "text-custom-white" : ""}
+            >
+                TV Shows
+            </span>
+            <span
+                onClick={() => setFilter("Movies")}
+                className={filter === "Movies" ? "text-custom-white" : ""}
+            >
+                Movies
+            </span>
         </>
     );
 }
