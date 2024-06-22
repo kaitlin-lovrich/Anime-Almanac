@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
 type AppContextValues = {
-    filter: 'TV Shows' | 'Movies' | null;
-    setFilter: React.Dispatch<React.SetStateAction<'TV Shows' | 'Movies' | null>>;
+    filter: "Home" | "TV Shows" | "Movies" | null;
+    setFilter: React.Dispatch<
+        React.SetStateAction<"Home" | "Movies" | "TV Shows" | null>
+    >;
 };
 
 export const AppContext = createContext<AppContextValues>({
-    filter: null,
+    filter: "Home",
     setFilter: () => {},
 });

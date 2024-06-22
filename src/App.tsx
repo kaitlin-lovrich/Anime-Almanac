@@ -6,7 +6,9 @@ import { useState } from "react";
 import TitlePage from "./pages/TitlePage";
 
 export default function App() {
-    const [filter, setFilter] = useState<"TV Shows" | "Movies" | null>(null);
+    const [filter, setFilter] = useState<"Home" | "Movies" | "TV Shows" | null>(
+        "Home"
+    );
 
     const contextValue = {
         filter,

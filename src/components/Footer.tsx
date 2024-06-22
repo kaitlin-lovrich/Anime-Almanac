@@ -26,8 +26,8 @@ function MobileNavigation() {
         <>
             <Link to="/">
                 <HiMiniHome
-                    onClick={() => setFilter(null)}
-                    className={filter === null ? "text-custom-white" : ""}
+                    onClick={() => setFilter("Home")}
+                    className={filter === "Home" ? "text-custom-white" : ""}
                 />
             </Link>
             <span>

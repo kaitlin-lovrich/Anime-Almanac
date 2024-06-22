@@ -10,7 +10,7 @@ export default function TitlePage() {
     const title: TitleData = location.state?.title; // Access the passed state
 
     if (!title) {
-        return <p>No title data available.</p>; // Render a fallback if no title data is passed
+        return <p className="text-custom-white">No title data available.</p>;
     }
 
     return (

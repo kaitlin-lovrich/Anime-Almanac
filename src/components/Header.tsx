@@ -40,8 +40,8 @@ function DesktopNavigation() {
         <>
             <Link to="/">
                 <span
-                    onClick={() => setFilter(null)}
-                    className={filter === null ? "text-custom-white" : ""}
+                    onClick={() => setFilter("Home")}
+                    className={filter === "Home" ? "text-custom-white" : ""}
                 >
                     Home
                 </span>
