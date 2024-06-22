@@ -3,36 +3,46 @@
 @tailwind utilities;
 
 .text-stroke-blue {
-  -webkit-text-stroke: 1px rgb(229, 229, 229);
-  color: rgb(17, 109, 110);
+    -webkit-text-stroke: 1px rgb(229, 229, 229);
+    color: rgb(17, 109, 110);
 }
 
 .text-stroke-red {
-  -webkit-text-stroke: 1px rgb(229, 229, 229);
-  color: rgb(205, 24, 24);
+    -webkit-text-stroke: 1px rgb(229, 229, 229);
+    color: rgb(205, 24, 24);
 }
 
 .loading-item {
-  background-color: rgba(78, 54, 54, 0.85); /* Initial opacity */
-  animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
+    background-color: rgba(78, 54, 54, 0.85); /* Initial opacity */
+    animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
 }
 
-.multiline-truncate {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* Number of lines before truncation */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 5.3em; /* Adjust this to fit the number of lines you want */
-  line-height: 1.6em; /* Adjust this to control the spacing between lines */
+.multiline-truncate-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Number of lines before truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 5.3em; /* Adjust this to fit the number of lines you want */
+    line-height: 1.6em; /* Adjust this to control the spacing between lines */
+}
+
+.multiline-truncate-6 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6; /* Number of lines before truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 9.9em; /* Adjust this to fit the number of lines you want */
+    line-height: 1.7em; /* Adjust this to control the spacing between lines */
 }
 
 @keyframes fadeInOut {
-  0% {
-    background-color: rgba(78, 54, 54); /* Start with high opacity */
-  }
+    0% {
+        background-color: rgba(78, 54, 54); /* Start with high opacity */
+    }
 
-  100% {
-    background-color: rgba(78, 54, 54, 0.4); /* End with low opacity */
-  }
+    100% {
+        background-color: rgba(78, 54, 54, 0.4); /* End with low opacity */
+    }
 }
