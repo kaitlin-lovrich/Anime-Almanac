@@ -15,8 +15,8 @@ export default function TitlePage() {
 
     return (
         <>
-            <div className="flex justify-center flex-col mx-auto md:mt-8 lg:mt-28 w-[90%] lg:w-[85%] lg:max-w-[1380px] text-custom-white gap-8">
-                <div className="flex flex-col md:flex-row gap-8 text-lg">
+            <div className="flex justify-center flex-col mx-auto mt-8 lg:mt-28 mb-24 w-[90%] lg:w-[85%] lg:max-w-[1380px] text-custom-white gap-4 md:gap-8">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-lg ">
                     <section className="w-full max-w-[350px] md:w-80 self-center md:self-start">
                         <img
                             src={title.images.jpg.image_url}
@@ -30,11 +30,6 @@ export default function TitlePage() {
                                 {title.title_english}
                             </h1>
                             <p>
-                                {title.genres
-                                    .map((genre, index) => genre[index])
-                                    .join(" ")}
-                            </p>
-                            <p>
                                 {title.year}{" "}
                                 <span className="font-light px-2 font-base">
                                     {title.rating}
@@ -43,8 +38,14 @@ export default function TitlePage() {
                                     ? `${title.type} Series`
                                     : title.type}
                             </p>
-                            <p>
-                                {title.episodes} episodes {title.duration}isode
+                            <p className="whitespace-break-spaces">
+                                {title.genres
+                                    .map((genre) => genre.name)
+                                    .join("   ")}
+                            </p>
+                            <p className="whitespace-break-spaces">
+                                {title.episodes} episodes {"   "}
+                                {title.duration}isode
                             </p>
                         </aside>
                         <span className="*:size-7 md:*:size-8 lg:*:size-9 xl:*:size-10 *:cursor-pointer hover:*:scale-110 active:*:scale-110 *:duration-300">
@@ -58,7 +59,7 @@ export default function TitlePage() {
                         </span>
                     </div>
                 </div>
-                <p className="text-xl lg:text-2xl text-justify multiline-truncate-6">
+                <p className="text-xl lg:text-2xl text-justify lg:leading-[2.8rem] multiline-truncate-2">
                     {title.synopsis}
                 </p>
             </div>

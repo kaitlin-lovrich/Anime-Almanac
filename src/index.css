@@ -17,7 +17,7 @@
     animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
 }
 
-.multiline-truncate-3 {
+.multiline-truncate-1 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3; /* Number of lines before truncation */
@@ -27,14 +27,14 @@
     line-height: 1.6em; /* Adjust this to control the spacing between lines */
 }
 
-.multiline-truncate-6 {
+.multiline-truncate-2 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 6; /* Number of lines before truncation */
+    -webkit-line-clamp: 5; /* Number of lines before truncation */
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 9.9em; /* Adjust this to fit the number of lines you want */
-    line-height: 1.7em; /* Adjust this to control the spacing between lines */
+    height: 10em; /* Adjust this to fit the number of lines you want */
+    line-height: 1.9em; /* Adjust this to control the spacing between lines */
 }
 
 @keyframes fadeInOut {
@@ -44,5 +44,12 @@
 
     100% {
         background-color: rgba(78, 54, 54, 0.4); /* End with low opacity */
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .multiline-truncate-2 {
+        -webkit-line-clamp: 6; /* Number of lines before truncation */
+        height: 11.6em; /* Adjust this to fit the number of lines you want */
     }
 }

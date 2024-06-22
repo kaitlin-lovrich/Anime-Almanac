@@ -6,7 +6,6 @@ import { TitleData } from "../lib/dataTypes";
 export default function Header() {
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
-    console.log(title);
 
     return (
         <>
@@ -39,12 +38,13 @@ function DesktopNavigation() {
 
     return (
         <>
-            <Link
-                to="/"
-                onClick={() => setFilter(null)}
-                className={filter === null ? "text-custom-white" : ""}
-            >
-                <span>Home</span>
+            <Link to="/">
+                <span
+                    onClick={() => setFilter(null)}
+                    className={filter === null ? "text-custom-white" : ""}
+                >
+                    Home
+                </span>
             </Link>
             <FilterOptions />
             <span>My Favorites</span>
