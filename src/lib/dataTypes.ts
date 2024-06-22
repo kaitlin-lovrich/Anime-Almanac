@@ -22,6 +22,7 @@ export type TitleData = {
   rating: string;
   episodes: string;
   duration: string;
+  synopsis: string;
   trailer: Trailer;
   mal_id: number;
 };
