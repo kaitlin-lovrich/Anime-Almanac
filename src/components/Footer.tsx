@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FiHeart } from "react-icons/fi";
+import { FaRegHeart } from "react-icons/fa";
 import { HiMiniHome } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
 import { AppContext } from "./AppContext";
@@ -19,13 +19,16 @@ export default function Footer() {
 }
 
 function MobileNavigation() {
-    const { filter, setFilter } = useContext(AppContext)
+    const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
-            <HiMiniHome onClick={() => setFilter(null)} className={filter === null ? 'text-custom-white' : ''} />
+            <HiMiniHome
+                onClick={() => setFilter(null)}
+                className={filter === null ? "text-custom-white" : ""}
+            />
             <IoSearch />
-            <FiHeart />
+            <FaRegHeart />
         </>
     );
 }
