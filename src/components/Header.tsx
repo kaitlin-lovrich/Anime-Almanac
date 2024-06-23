@@ -49,7 +49,16 @@ function DesktopNavigation() {
                 </span>
             </Link>
             <FilterOptions />
-            <span>My Favorites</span>
+            <Link to="/my-favorites">
+                <span
+                    onClick={() => setFilter("My Favorites")}
+                    className={
+                        filter === "My Favorites" ? "text-custom-white" : ""
+                    }
+                >
+                    My Favorites
+                </span>
+            </Link>
         </>
     );
 }

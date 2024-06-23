@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import { AppContext } from "../components/AppContext";
 import FavoriteTitleCard from "../components/FavoriteTitleCard";
 
-export default function TitlePage() {
+export default function MyFavoritesPage() {
     const { setFilter, favoritedTitles } = useContext(AppContext);
 
     setFilter("My Favorites");
