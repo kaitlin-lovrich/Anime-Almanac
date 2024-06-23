@@ -17,7 +17,7 @@ export default function TitlePage() {
         <>
             <div className="flex justify-center flex-col mx-auto mt-8 lg:mt-28 mb-24 w-[90%] lg:w-[85%] lg:max-w-[1380px] text-custom-white gap-4 md:gap-8">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-lg ">
-                    <section className="w-full max-w-[350px] md:w-1/2 md:max-w-[380px] lg:w-2/5 lg:max-w-[400px] xl:max-w-[430px] self-center md:self-start">
+                    <section className="w-[80%] max-w-[350px] md:w-1/2 md:max-w-[380px] lg:w-2/5 lg:max-w-[400px] xl:max-w-[430px] self-center md:self-start">
                         <img
                             src={title.images.jpg.image_url}
                             alt={`${title.title_english} image`}
@@ -48,7 +48,7 @@ export default function TitlePage() {
                                 {title.duration}isode
                             </p>
                         </aside>
-                        <span className="*:size-7 md:*:size-8 lg:*:size-9 xl:*:size-10 *:cursor-pointer hover:*:scale-110 active:*:scale-110 *:duration-300">
+                        <span className="*:size-9 xl:*:size-10 *:cursor-pointer hover:*:scale-110 active:*:scale-110 *:duration-300">
                             {isSaved ? (
                                 <FaHeart onClick={() => setisSaved(!isSaved)} />
                             ) : (
