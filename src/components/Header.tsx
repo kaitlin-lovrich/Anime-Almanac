@@ -13,7 +13,7 @@ export default function Header() {
                 <Link to="/" className="link-logo">
                     <div className="w-60 lg:w-72 m-1 lg:m-2">
                         <img
-                            src="Anime-Almanacs-logo.png"
+                            src="/Anime-Almanacs-logo.png"
                             className="w-full drop-shadow-md"
                         />
                     </div>
