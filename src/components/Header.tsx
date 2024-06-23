@@ -4,6 +4,7 @@ import { AppContext } from "./AppContext";
 import { TitleData } from "../lib/dataTypes";
 
 export default function Header() {
+    const { setFilter } = useContext(AppContext);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
 
@@ -11,8 +12,9 @@ export default function Header() {
         <>
             <nav className="flex lg:fixed top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
-                    <div className="w-60 lg:w-72 m-1 lg:m-2">
+                    <div className="w-60 lg:w-72 m-1 lg:m-2 hover:scale-105 duration-300">
                         <img
+                            onClick={() => setFilter("Home")}
                             src="/Anime-Almanacs-logo.png"
                             className="w-full drop-shadow-md"
                         />
