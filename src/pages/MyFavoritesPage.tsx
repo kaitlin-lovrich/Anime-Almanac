@@ -10,7 +10,9 @@ export default function MyFavoritesPage() {
 
     return (
         <>
-            <h2 className="text-2xl md:text-3xl font-bold">My Favorites</h2>
+            <h2 className="text-2xl md:text-3xl text-custom-white font-bold">
+                My Favorites
+            </h2>
             <div className="flex justify-center flex-col mx-auto mt-8 lg:mt-28 mb-24 w-[90%] lg:w-[85%] lg:max-w-[1380px] text-custom-white gap-5 md:gap-8">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-lg ">
                     {favoritedTitles.length > 0 ? (
