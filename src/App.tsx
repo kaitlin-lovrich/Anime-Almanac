@@ -4,15 +4,19 @@ import Header from "./components/Header";
 import { AppContext } from "./components/AppContext";
 import { useState } from "react";
 import TitlePage from "./pages/TitlePage";
+import { TitleData } from "./lib/dataTypes";
 
 export default function App() {
-    const [filter, setFilter] = useState<"Home" | "Movies" | "TV Shows" | null>(
-        "Home"
-    );
+    const [filter, setFilter] = useState<
+        "Home" | "Movies" | "TV Shows" | "My Favorites" | null
+    >("Home");
+    const [favoritedTitles, setFavoritedTitles] = useState<TitleData[]>([]);
 
     const contextValue = {
         filter,
         setFilter,
+        favoritedTitles,
+        setFavoritedTitles,
     };
 
     return (
