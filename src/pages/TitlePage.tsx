@@ -1,17 +1,21 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TitleData } from "../lib/dataTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
+import { AppContext } from "../components/AppContext";
 
 export default function TitlePage() {
     const [isSaved, setisSaved] = useState(false);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
+    const { setFilter } = useContext(AppContext);
 
     if (!title) {
         return <p className="text-custom-white">No title data available.</p>;
     }
+
+    setFilter(null);
 
     return (
         <>
