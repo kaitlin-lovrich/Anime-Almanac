@@ -34,7 +34,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     height: 10em; /* Fit the number of lines */
-    line-height: 1.9em; /* Control the spacing between lines */
 }
 
 @keyframes fadeInOut {

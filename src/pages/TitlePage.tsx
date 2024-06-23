@@ -7,6 +7,7 @@ import { AppContext } from "../components/AppContext";
 
 export default function TitlePage() {
     const [isSaved, setisSaved] = useState(false);
+    const [showMore, setShowMore] = useState(false);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
     const { setFilter } = useContext(AppContext);
@@ -52,7 +53,7 @@ export default function TitlePage() {
                                 {title.duration}isode
                             </p>
                         </aside>
-                        <span className="*:size-10 *:cursor-pointer hover:*:scale-110 active:*:scale-110 *:duration-300">
+                        <span className="*:size-10 *:cursor-pointer hover:*:text-white hover:*:scale-110 active:*:scale-110 *:duration-300">
                             {isSaved ? (
                                 <FaHeart onClick={() => setisSaved(!isSaved)} />
                             ) : (
@@ -63,7 +64,13 @@ export default function TitlePage() {
                         </span>
                     </div>
                 </div>
-                <p className="text-xl lg:text-2xl sm:text-justify lg:leading-[2.8rem] multiline-truncate-2">
+                <p
+                    onClick={() => setShowMore(!showMore)}
+                    className={`
+                        ${showMore ? "" : "multiline-truncate-2"} 
+                              text-xl lg:text-2xl sm:text-justify leading-[1.9em] lg:leading-[1.9em] cursor-pointer hover:text-white duration-300
+                    `}
+                >
                     {title.synopsis}
                 </p>
             </div>
