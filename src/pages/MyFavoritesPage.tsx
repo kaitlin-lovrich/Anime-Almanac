@@ -13,7 +13,7 @@ export default function MyFavoritesPage() {
     return (
         <>
             <div className="flex justify-center flex-col mx-auto mt-5 lg:mt-28 mb-24 w-[90%] lg:w-[85%] lg:max-w-[1060px] text-custom-white gap-5 md:gap-8">
-                <h2 className="text-3xl md:text-5xl text-custom-white font-bold">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl text-custom-white font-bold">
                     My Favorites
                 </h2>
                 <div className="flex flex-col gap-4 md:gap-8 text-lg min-w-[330px]">
@@ -27,7 +27,9 @@ export default function MyFavoritesPage() {
                             </div>
                         ))
                     ) : (
-                        <p>No saved titles</p>
+                        <p className="flex justify-center h-screen text-xl md:text-2xl lg:3xl">
+                            No saved titles
+                        </p>
                     )}
                 </div>
             </div>
