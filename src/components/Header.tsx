@@ -1,12 +1,10 @@
 import { useContext } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { AppContext } from "./AppContext";
-import { TitleData } from "../lib/dataTypes";
 
 export default function Header() {
     const { setFilter } = useContext(AppContext);
     const location = useLocation();
-    const title: TitleData = location.state?.title; // Access the passed state
 
     return (
         <>
@@ -24,7 +22,7 @@ export default function Header() {
                     <DesktopNavigation />
                 </div>
             </nav>
-            {title === undefined && (
+            {location.pathname === "/" && (
                 <div className="flex md:hidden justify-around bg-custom-gradient-5 items-center mx-auto w-[60%] max-w-[325px] mt-[1rem] rounded-lg text-custom-gray *:text-lg *:font-heading *:p-1.5 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
                     <FilterOptions />
                 </div>
@@ -49,7 +47,16 @@ function DesktopNavigation() {
                 </span>
             </Link>
             <FilterOptions />
-            <span>My Favorites</span>
+            <Link to="/my-favorites">
+                <span
+                    onClick={() => setFilter("My Favorites")}
+                    className={
+                        filter === "My Favorites" ? "text-custom-white" : ""
+                    }
+                >
+                    My Favorites
+                </span>
+            </Link>
         </>
     );
 }
@@ -59,18 +66,20 @@ function FilterOptions() {
 
     return (
         <>
-            <span
+            <Link
+                to="/"
                 onClick={() => setFilter("TV Shows")}
                 className={filter === "TV Shows" ? "text-custom-white" : ""}
             >
                 TV Shows
-            </span>
-            <span
+            </Link>
+            <Link
+                to="/"
                 onClick={() => setFilter("Movies")}
                 className={filter === "Movies" ? "text-custom-white" : ""}
             >
                 Movies
-            </span>
+            </Link>
         </>
     );
 }

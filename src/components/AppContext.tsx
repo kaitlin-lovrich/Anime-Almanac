@@ -1,13 +1,23 @@
 import { createContext } from "react";
+import { TitleData } from "../lib/dataTypes";
 
 type AppContextValues = {
-    filter: "Home" | "TV Shows" | "Movies" | null;
+    filter: "Home" | "TV Shows" | "Movies" | "My Favorites" | null;
     setFilter: React.Dispatch<
-        React.SetStateAction<"Home" | "Movies" | "TV Shows" | null>
+        React.SetStateAction<
+            "Home" | "Movies" | "TV Shows" | "My Favorites" | null
+        >
     >;
+
+    favoritedTitles: TitleData[];
+    setFavoritedTitles: React.Dispatch<React.SetStateAction<TitleData[]>>;
+    handleHeartClick: (title: TitleData) => void;
 };
 
 export const AppContext = createContext<AppContextValues>({
     filter: "Home",
     setFilter: () => {},
+    favoritedTitles: [],
+    setFavoritedTitles: () => {},
+    handleHeartClick: () => {},
 });

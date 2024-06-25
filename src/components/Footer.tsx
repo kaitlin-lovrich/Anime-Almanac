@@ -33,9 +33,14 @@ function MobileNavigation() {
             <span>
                 <IoSearch />
             </span>
-            <span>
-                <FaRegHeart />
-            </span>
+            <Link to="/my-favorites">
+                <FaRegHeart
+                    onClick={() => setFilter("My Favorites")}
+                    className={
+                        filter === "My Favorites" ? "text-custom-white" : ""
+                    }
+                />
+            </Link>
         </>
     );
 }

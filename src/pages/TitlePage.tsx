@@ -1,6 +1,6 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TitleData } from "../lib/dataTypes";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { AppContext } from "../components/AppContext";
@@ -10,13 +10,29 @@ export default function TitlePage() {
     const [showMore, setShowMore] = useState(false);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
-    const { setFilter } = useContext(AppContext);
+    const { setFilter, favoritedTitles, handleHeartClick } =
+        useContext(AppContext);
+
+    useEffect(() => {
+        setFilter(null);
+    }, [setFilter]);
+
+    // Check if the title is already saved to show the correct heart icon
+    useEffect(() => {
+        const isFavorited = favoritedTitles.some(
+            (favTitle) => favTitle.mal_id === title?.mal_id
+        );
+        setisSaved(isFavorited);
+    }, [favoritedTitles, title]);
 
     if (!title) {
         return <p className="text-custom-white">No title data available.</p>;
     }
 
-    setFilter(null);
+    function toggleSave() {
+        setisSaved(!isSaved);
+        handleHeartClick(title);
+    }
 
     return (
         <>
@@ -55,11 +71,9 @@ export default function TitlePage() {
                         </aside>
                         <span className="*:size-10 *:cursor-pointer hover:*:text-white hover:*:scale-110 active:*:scale-110 *:duration-300">
                             {isSaved ? (
-                                <FaHeart onClick={() => setisSaved(!isSaved)} />
+                                <FaHeart onClick={toggleSave} />
                             ) : (
-                                <FaRegHeart
-                                    onClick={() => setisSaved(!isSaved)}
-                                />
+                                <FaRegHeart onClick={toggleSave} />
                             )}
                         </span>
                     </div>
