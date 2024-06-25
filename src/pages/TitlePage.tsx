@@ -10,7 +10,7 @@ export default function TitlePage() {
     const [showMore, setShowMore] = useState(false);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
-    const { setFilter, favoritedTitles, setFavoritedTitles } =
+    const { setFilter, favoritedTitles, handleHeartClick } =
         useContext(AppContext);
 
     useEffect(() => {
@@ -25,28 +25,13 @@ export default function TitlePage() {
         setisSaved(isFavorited);
     }, [favoritedTitles, title]);
 
-    function handleHeartClick(title: TitleData) {
-        setisSaved(!isSaved);
-
-        setFavoritedTitles((prevTitles) => {
-            const isTitleFavorited = prevTitles.some(
-                (favoritedTitle) => favoritedTitle.mal_id === title.mal_id
-            );
-
-            if (isTitleFavorited) {
-                // If already saved, remove it from the saved list
-                return prevTitles.filter(
-                    (favoritedTitle) => favoritedTitle.mal_id !== title.mal_id
-                );
-            } else {
-                // If not saved, add it to the saved list
-                return [...prevTitles, title];
-            }
-        });
-    }
-
     if (!title) {
         return <p className="text-custom-white">No title data available.</p>;
+    }
+
+    function toggleSave() {
+        setisSaved(!isSaved);
+        handleHeartClick(title);
     }
 
     return (
@@ -86,13 +71,9 @@ export default function TitlePage() {
                         </aside>
                         <span className="*:size-10 *:cursor-pointer hover:*:text-white hover:*:scale-110 active:*:scale-110 *:duration-300">
                             {isSaved ? (
-                                <FaHeart
-                                    onClick={() => handleHeartClick(title)}
-                                />
+                                <FaHeart onClick={toggleSave} />
                             ) : (
-                                <FaRegHeart
-                                    onClick={() => handleHeartClick(title)}
-                                />
+                                <FaRegHeart onClick={toggleSave} />
                             )}
                         </span>
                     </div>

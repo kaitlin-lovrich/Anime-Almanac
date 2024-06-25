@@ -11,11 +11,11 @@ export default function App() {
     const [filter, setFilter] = useState<
         "Home" | "Movies" | "TV Shows" | "My Favorites" | null
     >("Home");
+
     const [favoritedTitles, setFavoritedTitles] = useState<TitleData[]>(() => {
         try {
             const savedFavorites = localStorage.getItem("favoritedTitles");
             if (savedFavorites) {
-                console.log("Initializing from localStorage:", savedFavorites);
                 return JSON.parse(savedFavorites);
             }
         } catch (error) {
@@ -30,9 +30,10 @@ export default function App() {
     // Save favorited titles to localStorage whenever they change
     useEffect(() => {
         try {
-            const favoritedTitlesJSON = JSON.stringify(favoritedTitles);
-            console.log("Saving to localStorage:", favoritedTitlesJSON);
-            localStorage.setItem("favoritedTitles", favoritedTitlesJSON);
+            localStorage.setItem(
+                "favoritedTitles",
+                JSON.stringify(favoritedTitles)
+            );
         } catch (error) {
             console.error(
                 "Failed to save favorited titles to localStorage:",
@@ -41,11 +42,30 @@ export default function App() {
         }
     }, [favoritedTitles]);
 
+    function handleHeartClick(title: TitleData) {
+        setFavoritedTitles((prevTitles) => {
+            const isTitleFavorited = prevTitles.some(
+                (favoritedTitle) => favoritedTitle.mal_id === title.mal_id
+            );
+
+            if (isTitleFavorited) {
+                // If already saved, remove it from the saved list
+                return prevTitles.filter(
+                    (favoritedTitle) => favoritedTitle.mal_id !== title.mal_id
+                );
+            } else {
+                // If not saved, add it to the saved list
+                return [...prevTitles, title];
+            }
+        });
+    }
+
     const contextValue = {
         filter,
         setFilter,
         favoritedTitles,
         setFavoritedTitles,
+        handleHeartClick,
     };
 
     return (

@@ -11,6 +11,7 @@ type AppContextValues = {
 
     favoritedTitles: TitleData[];
     setFavoritedTitles: React.Dispatch<React.SetStateAction<TitleData[]>>;
+    handleHeartClick: (title: TitleData) => void;
 };
 
 export const AppContext = createContext<AppContextValues>({
@@ -18,4 +19,5 @@ export const AppContext = createContext<AppContextValues>({
     setFilter: () => {},
     favoritedTitles: [],
     setFavoritedTitles: () => {},
+    handleHeartClick: () => {},
 });
