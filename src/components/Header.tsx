@@ -66,18 +66,20 @@ function FilterOptions() {
 
     return (
         <>
-            <span
+            <Link
+                to="/"
                 onClick={() => setFilter("TV Shows")}
                 className={filter === "TV Shows" ? "text-custom-white" : ""}
             >
                 TV Shows
-            </span>
-            <span
+            </Link>
+            <Link
+                to="/"
                 onClick={() => setFilter("Movies")}
                 className={filter === "Movies" ? "text-custom-white" : ""}
             >
                 Movies
-            </span>
+            </Link>
         </>
     );
 }
