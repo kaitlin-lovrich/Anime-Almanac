@@ -1,6 +1,6 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TitleData } from "../lib/dataTypes";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { AppContext } from "../components/AppContext";
@@ -10,7 +10,20 @@ export default function TitlePage() {
     const [showMore, setShowMore] = useState(false);
     const location = useLocation();
     const title: TitleData = location.state?.title; // Access the passed state
-    const { setFilter, setFavoritedTitles } = useContext(AppContext);
+    const { setFilter, favoritedTitles, setFavoritedTitles } =
+        useContext(AppContext);
+
+    useEffect(() => {
+        setFilter(null);
+    }, [setFilter]);
+
+    // Check if the title is already saved to show the correct heart icon
+    useEffect(() => {
+        const isFavorited = favoritedTitles.some(
+            (favTitle) => favTitle.mal_id === title?.mal_id
+        );
+        setisSaved(isFavorited);
+    }, [favoritedTitles, title]);
 
     function handleHeartClick(title: TitleData) {
         setisSaved(!isSaved);
@@ -35,8 +48,6 @@ export default function TitlePage() {
     if (!title) {
         return <p className="text-custom-white">No title data available.</p>;
     }
-
-    setFilter(null);
 
     return (
         <>

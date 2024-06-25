@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Footer from "../components/Footer";
 import { AppContext } from "../components/AppContext";
 import FavoriteTitleCard from "../components/FavoriteTitleCard";
@@ -6,7 +6,9 @@ import FavoriteTitleCard from "../components/FavoriteTitleCard";
 export default function MyFavoritesPage() {
     const { setFilter, favoritedTitles } = useContext(AppContext);
 
-    setFilter("My Favorites");
+    useEffect(() => {
+        setFilter("My Favorites");
+    }, [setFilter]);
 
     return (
         <>
