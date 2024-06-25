@@ -13,22 +13,24 @@ export default function FavoriteTitleCard({ title }: FavoritetitleCardProps) {
 
     return (
         <>
-            <Link to={`../title-page/${title.mal_id}`} state={{ title }}>
-                <div className="w-[200px] max-w-[350px] md:w-1/2 md:max-w-[380px] lg:w-2/5 lg:max-w-[400px] xl:max-w-[430px] h-[280px] max-h-[430px] md:h-full self-center md:self-start">
-                    <img
-                        src={title.images.jpg.image_url}
-                        alt={`${title.title_english} image`}
-                        className="w-full h-full rounded"
-                        onClick={() => setFilter(null)}
-                    />
-                </div>
+            <Link
+                to={`../title-page/${title.mal_id}`}
+                state={{ title }}
+                className="w-1/2 max-w-[215px] sm:w-2/5 sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] h-full min-h-[280px] self-center md:self-start"
+            >
+                <img
+                    src={title.images.jpg.image_url}
+                    alt={`${title.title_english} image`}
+                    className="w-full h-full min-h-[280px] rounded"
+                    onClick={() => setFilter(null)}
+                />
             </Link>
-            <div className="flex flex-col justify-between md:w-1/2 gap-5">
+            <div className="flex flex-col justify-between w-1/2 sm:w-3/5 gap-5">
                 <aside className="flex flex-col *:py-1.5">
                     <h1 className="text-xl md:text-3xl lg:text-4xl font-bold">
                         {title.title_english}
                     </h1>
-                    <p>
+                    <p className="hidden sm:block">
                         {title.year}{" "}
                         <span className="font-light px-2 font-base">
                             {title.rating}
@@ -40,7 +42,7 @@ export default function FavoriteTitleCard({ title }: FavoritetitleCardProps) {
                     <p className="whitespace-break-spaces">
                         {title.genres.map((genre) => genre.name).join("   ")}
                     </p>
-                    <p className="whitespace-break-spaces">
+                    <p className="whitespace-break-spaces hidden sm:block">
                         {title.episodes} episodes {"   "}
                         {title.duration}isode
                     </p>
