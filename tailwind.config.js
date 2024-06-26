@@ -8,6 +8,8 @@ export default {
             special: ['"Ruslan Display"', "serif"],
         },
         backgroundImage: {
+            "custom-gradient-6":
+                "linear-gradient(rgba(50, 30, 30), rgb(119, 90, 90))",
             "custom-gradient-5":
                 "linear-gradient(rgba(78, 54, 54), rgba(78, 54, 54, 0))",
             "custom-gradient-4":
@@ -25,7 +27,7 @@ export default {
             "custom-drop": "0 10px 35px rgba(0, 0, 0, .45)",
         },
         extend: {
-          colors: {
+            colors: {
                 "custom-white": "rgb(229, 229, 229)",
                 "custom-gray": "rgb(176, 176, 176)",
             },

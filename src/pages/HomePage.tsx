@@ -1,15 +1,58 @@
 import { useEffect, useState, useRef } from "react";
-import { type GenreType } from "../lib/dataTypes";
+import { TitleData, type GenreType } from "../lib/dataTypes";
 import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
+import SearchTitles from "../components/SearchTitles";
 
 export default function HomePage() {
     const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
     const [loadedGenresCount, setLoadedGenresCount] = useState(2);
     const [lastLoadedGenre, setLastLoadedGenre] = useState<string | null>(null);
     const loadingRef = useRef(null);
+
+    // Using this in place of actual data for testing purposes
+    const testTitles: TitleData[] = [
+        {
+            title_english: "test title 1",
+            images: {
+                jpg: {
+                    image_url: "./android-chrome-192x192.png",
+                },
+            },
+            genres: [{ mal_id: 25, name: "Sci-Fi" }],
+            type: "string",
+            year: 2024,
+            rating: "string",
+            episodes: "string",
+            duration: "string",
+            synopsis: "string",
+            trailer: {
+                embed_url: "string",
+            },
+            mal_id: 998,
+        },
+        {
+            title_english: "test title 2",
+            images: {
+                jpg: {
+                    image_url: "./android-chrome-192x192.png",
+                },
+            },
+            genres: [{ mal_id: 26, name: "Sci-Fi" }],
+            type: "string",
+            year: 2024,
+            rating: "string",
+            episodes: "string",
+            duration: "string",
+            synopsis: "string",
+            trailer: {
+                embed_url: "string",
+            },
+            mal_id: 999,
+        },
+    ];
 
     // useEffect to load the initial genres
     useEffect(() => {
@@ -56,7 +99,6 @@ export default function HomePage() {
                         ]);
                         setLoadedGenresCount((count) => count + 1);
                         setLastLoadedGenre(nextGenreName);
-                        console.log(nextGenreName);
                     }
                 }, 3500);
             } catch (err) {
@@ -92,6 +134,7 @@ export default function HomePage() {
     return (
         <>
             <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
+                <SearchTitles allTitles={testTitles} />
                 {genres.map((genre) => (
                     <GenreTitlesRow key={genre!.mal_id} genre={genre} />
                 ))}
