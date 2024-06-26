@@ -61,13 +61,13 @@ type SearchInputBarProps = {
 
 function SearchInputBar({ input, onChangeInput }: SearchInputBarProps) {
     return (
-        <div className="flex bg-custom-gradient-6 px-1 py-2 rounded-md w-[300px]">
+        <div className="flex bg-custom-gradient-6 px-1 py-2 rounded-md w-[300px] focus-within:ring-2 focus-within:ring-custom-gray">
             <IoSearch className="size-8 lg:size-9 text-custom-gray" />
             <input
                 value={input}
                 onChange={(e) => onChangeInput(e.currentTarget.value)}
                 placeholder="Search"
-                className="bg-inherit pl-2 rounded-md w-[230px] text-lg lg:text-xl font-body active:ring-transparent"
+                className="bg-inherit pl-2 rounded-md w-[230px] text-custom-gray text-lg lg:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white"
             />
             {/* <input className="search-bar" /> */}
         </div>
