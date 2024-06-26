@@ -17,14 +17,6 @@ export default function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
     const { filter } = useContext(AppContext);
 
     useEffect(() => {
-        console.log("TitleList component mounted");
-        console.log("mal_id:", genre!.mal_id, "genre name:", genre!.name);
-        return () => {
-            console.log("TitleList component unmounted");
-        };
-    }, [genre]); // Only runs on mount and unmount
-
-    useEffect(() => {
         let isMounted = true; // tracks mounted state
         setIsLoading(true);
         async function loadTitles() {

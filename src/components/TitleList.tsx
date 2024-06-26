@@ -12,14 +12,6 @@ export default function TitleList({ titles, searchListKey }: TitleListProps) {
     const [current, setCurrent] = useState(0);
     const [itemsToShow, setItemsToShow] = useState(6);
 
-    // useEffect(() => {
-    //     console.log("TitleList component mounted");
-
-    //     return () => {
-    //         console.log("TitleList component unmounted");
-    //     };
-    // }, []); // Only runs on mount and unmount
-
     function updateItemsToShow() {
         const width = window.innerWidth;
         if (width <= 640) {
@@ -36,7 +28,6 @@ export default function TitleList({ titles, searchListKey }: TitleListProps) {
     }
 
     useEffect(() => {
-        // console.log("Window event listening in useEffect");
         window.addEventListener("resize", updateItemsToShow);
         updateItemsToShow();
 
@@ -79,14 +70,30 @@ export default function TitleList({ titles, searchListKey }: TitleListProps) {
         (title) => title.title_english !== null
     );
 
+    // Original getVisibleItems function:
+    // function getVisibleTitles() {
+    //     // Get a slice of titles starting from 'current'
+    //     let items = filteredTitles.slice(current, current + itemsToShow);
+    //     // If the slice is too short (we're at the end of the array), append items from the beginning
+    //     if (items.length < itemsToShow) {
+    //         items = items.concat(
+    //             filteredTitles.slice(0, itemsToShow - items.length)
+    //         );
+    //     }
+    //     return items;
+    // }
+
     function getVisibleTitles() {
-        // Get a slice of titles starting from 'current'
-        let items = filteredTitles.slice(current, current + itemsToShow);
-        // If the slice is too short (we're at the end of the array), append items from the beginning
-        if (items.length < itemsToShow) {
-            items = items.concat(
-                filteredTitles.slice(0, itemsToShow - items.length)
-            );
+        let items;
+        if (current + itemsToShow > filteredTitles.length) {
+            // Calculate how many items we need to wrap around
+            const overflowCount =
+                (current + itemsToShow) % filteredTitles.length;
+            items = filteredTitles
+                .slice(current)
+                .concat(filteredTitles.slice(0, overflowCount));
+        } else {
+            items = filteredTitles.slice(current, current + itemsToShow);
         }
         return items;
     }
@@ -106,12 +113,10 @@ export default function TitleList({ titles, searchListKey }: TitleListProps) {
                         </div>
                     </div>
                 )}
-                {visibleTitles.map((title, index) => {
+                {visibleTitles.map((title) => {
                     const key = searchListKey
-                        ? `${title.mal_id}-search-${title.title_english}-${index}`
+                        ? `${title.mal_id}-search`
                         : title.mal_id;
-                    // console.log("Generated Key:", key);
-
                     return (
                         <div key={key}>
                             <TitleCard title={title} />
