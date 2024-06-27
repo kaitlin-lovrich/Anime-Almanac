@@ -12,6 +12,7 @@ export default function HomePage() {
             <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
                 <SearchTitles />
                 <LoadAllGenres />
+                {/* <Loading /> */}
             </div>
             <Footer />
         </>

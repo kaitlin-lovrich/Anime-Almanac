@@ -48,7 +48,7 @@ export default function SearchTitles() {
 
     if (isLoading) {
         <SearchInputBar input={input} onChangeInput={setInput} />;
-        <div className="mt-8">
+        <div className="mt-4 sm:mt-6 md:mt-8">
             <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
                 Search Results
             </h3>
@@ -57,17 +57,21 @@ export default function SearchTitles() {
     }
 
     return (
-        <div className="mt-8">
-            <SearchInputBar input={input} onChangeInput={setInput} />
+        <div className="flex-flex-col">
+            <div className="mt-4 sm:mt-6 md:mt-8">
+                <SearchInputBar input={input} onChangeInput={setInput} />
+            </div>
             {input.trim() !== "" && (
                 <div className="mt-8">
-                    <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
+                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-gray">
                         Search Results:
                     </h3>
-                    {searchTitles.length > 0 ? (
+                    {isLoading ? (
+                        <Loading searchResults={true} />
+                    ) : searchTitles.length > 0 ? (
                         <TitleList titles={searchTitles} searchListKey={true} />
                     ) : (
-                        <p className="text-custom-gray text-xl pt-4">
+                        <p className="text-custom-gray text-xl pt-4 h-[320px]">
                             No titles found matching your search.
                         </p>
                     )}
