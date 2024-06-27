@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { TitleData, type GenreType } from "../lib/dataTypes";
+import { type GenreType } from "../lib/dataTypes";
 import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
@@ -7,52 +7,10 @@ import Footer from "../components/Footer";
 import SearchTitles from "../components/SearchTitles";
 
 export default function HomePage() {
-    // Using this in place of actual data for testing purposes
-    const testTitles: TitleData[] = [
-        {
-            title_english: "test-title-1",
-            images: {
-                jpg: {
-                    image_url: "./android-chrome-192x192.png",
-                },
-            },
-            genres: [{ mal_id: 25, name: "Sci-Fi" }],
-            type: "string",
-            year: 2024,
-            rating: "string",
-            episodes: "string",
-            duration: "string",
-            synopsis: "string",
-            trailer: {
-                embed_url: "string",
-            },
-            mal_id: 998,
-        },
-        {
-            title_english: "test-title-2",
-            images: {
-                jpg: {
-                    image_url: "./android-chrome-192x192.png",
-                },
-            },
-            genres: [{ mal_id: 26, name: "Sci-Fi" }],
-            type: "string",
-            year: 2024,
-            rating: "string",
-            episodes: "string",
-            duration: "string",
-            synopsis: "string",
-            trailer: {
-                embed_url: "string",
-            },
-            mal_id: 999,
-        },
-    ];
-
     return (
         <>
             <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
-                <SearchTitles allTitles={testTitles} />
+                <SearchTitles />
                 <LoadAllGenres />
             </div>
             <Footer />

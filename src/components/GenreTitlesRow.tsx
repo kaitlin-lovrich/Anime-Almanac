@@ -31,6 +31,7 @@ export default function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
                             : ""
                     }`
                 );
+
                 if (!response.ok)
                     throw new Error(`HTTP error! Status: ${response.status}`);
 

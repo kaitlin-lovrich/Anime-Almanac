@@ -1,52 +1,77 @@
-import { useMemo, useState } from "react";
-import { TitleData } from "../lib/dataTypes";
+import { useEffect, useState } from "react";
+import { Title, TitleData } from "../lib/dataTypes";
 import TitleList from "./TitleList";
 import "../index.css";
 import { IoSearch } from "react-icons/io5";
+import Loading from "./Loading";
 
-type SearchTitlesProps = {
-    allTitles: TitleData[];
-};
-
-// Search titles searches titles by name. It takes the user input as they type and matches it against the `allTitles` title data to show a list of all titles matching the user's search query
-export default function SearchTitles({ allTitles }: SearchTitlesProps) {
+export default function SearchTitles() {
     const [input, setInput] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchTitles, setSearchTitles] = useState<TitleData[]>([]);
 
-    // Memoize filtered titles to prevent unnecessary re-renders
-    const filteredTitles = useMemo(() => {
+    useEffect(() => {
+        // Only perform the search if input is not empty
         if (input.trim() === "") {
-            return [];
+            setSearchTitles([]);
+            setIsLoading(false);
+            return;
         }
 
-        // Filter titles based on the trimmed input
-        return allTitles.filter((title) =>
-            title.title_english.toLowerCase().includes(input.toLowerCase())
-        );
-    }, [input, allTitles]);
-    console.log("filteredTitles: ", filteredTitles);
+        setIsLoading(true);
+        async function loadSearchTitles() {
+            try {
+                const response = await fetch(
+                    `https://api.jikan.moe/v4/anime?order_by=popularity&q=${input}`
+                );
+                if (!response.ok)
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                const titlesArray: Title = await response.json();
+                // Remove duplicates by mal_id
+                const uniqueTitles = Array.from(
+                    new Map(
+                        titlesArray.data.map((item) => [item.mal_id, item])
+                    ).values()
+                );
+                setSearchTitles(uniqueTitles);
+            } catch (err) {
+                console.error(`Error: ${err}`);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        const debounceTimer = setTimeout(loadSearchTitles, 500); // Debounce for 500ms
+
+        return () => clearTimeout(debounceTimer); // Cleanup debounce timer on input change
+    }, [input]);
+
+    if (isLoading) {
+        <SearchInputBar input={input} onChangeInput={setInput} />;
+        <div className="mt-8">
+            <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
+                Search Results
+            </h3>
+            <Loading />;
+        </div>;
+    }
 
     return (
         <div className="mt-8">
             <SearchInputBar input={input} onChangeInput={setInput} />
-            {input.trim() !== "" ? (
-                filteredTitles.length > 0 ? (
-                    <div className="mt-8">
-                        <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
-                            Search Results
-                        </h3>
-                        <TitleList
-                            titles={filteredTitles}
-                            searchListKey={true}
-                        />
-                    </div>
-                ) : (
-                    <p>No titles found matching your search.</p>
-                )
-            ) : (
-                // Default message when there's no input
-                <p className="text-custom-gray text-xl pt-4">
-                    Please enter a search term to find titles.
-                </p>
+            {input.trim() !== "" && (
+                <div className="mt-8">
+                    <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
+                        Search Results:
+                    </h3>
+                    {searchTitles.length > 0 ? (
+                        <TitleList titles={searchTitles} searchListKey={true} />
+                    ) : (
+                        <p className="text-custom-gray text-xl pt-4">
+                            No titles found matching your search.
+                        </p>
+                    )}
+                </div>
             )}
         </div>
     );
@@ -70,22 +95,6 @@ export function SearchInputBar({ input, onChangeInput }: SearchInputBarProps) {
         </div>
     );
 }
-
-//  (From HomePage return)
-// return (
-//         <>
-//             <div className="flex flex-wrap justify-center mt-28 mb-24 mx-auto w-1/2">
-//  {/* Conditionally render "Search Results" Heading and row (the entire div below) when user clicks on search bar with an onClick, add showSearchResults state to toggle with the onClick*/}
-//                 {showSearchResults && <SearchTitles allTitles={testTitles} />}
-//                 {genres.map((genre) => (
-//                     <GenreTitlesRow key={genre!.mal_id} genre={genre} />
-//                 ))}
-//                 {lastLoadedGenre !== "Suspense" && <Loading />}
-//                 <div ref={loadingRef}></div>
-//             </div>
-//         </>
-//     );
-// }
 
 // // Using this in place of actual data for testing purposes
 //     const testTitles: TitleData[] = [
@@ -128,3 +137,17 @@ export function SearchInputBar({ input, onChangeInput }: SearchInputBarProps) {
 //             mal_id: 999,
 //         },
 //     ];
+
+// Previously inside SearchTitle component logic:
+// // Memoize filtered titles to prevent unnecessary re-renders
+// const filteredTitles = useMemo(() => {
+//     if (input.trim() === "") {
+//         return [];
+//     }
+
+//     // Filter titles based on the trimmed input
+//     return allTitles.filter((title) =>
+//         title.title_english.toLowerCase().includes(input.toLowerCase())
+//     );
+// }, [input, allTitles]);
+// console.log("filteredTitles: ", filteredTitles);
