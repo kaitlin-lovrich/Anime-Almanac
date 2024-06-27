@@ -57,8 +57,8 @@ export default function SearchTitles() {
     }
 
     return (
-        <div className="flex-flex-col">
-            <div className="mt-4 sm:mt-6 md:mt-8">
+        <div className="flex flex-col">
+            <div className="mx-auto mt-4 sm:mt-6 md:mt-8">
                 <SearchInputBar input={input} onChangeInput={setInput} />
             </div>
             {input.trim() !== "" && (

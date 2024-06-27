@@ -36,18 +36,13 @@ export default function Loading({ searchResults }: LoadingProps) {
     );
 
     return (
-        <div className="flex justify-evenly flex-wrap">
-            <div className="flex">
-                {loadingItems.map((item) => (
-                    <div key={item} className="flex">
-                        <div
-                            className={`${
-                                searchResults ? `mt-0` : `mt-16 md:mt-24`
-                            } loading-item mx-2  h-64 md:h-72 lg:h-80 w-36 md:w-40 lg:w-44 shadow-custom-inset rounded-md`}
-                        ></div>
-                    </div>
-                ))}
-            </div>
+        <div className={`flex ${searchResults ? `mt-0` : `mt-16 md:mt-24`}`}>
+            {loadingItems.map((item) => (
+                <div
+                    key={item}
+                    className="loading-item mx-2 h-64 md:h-72 lg:h-80 w-36 md:w-40 lg:w-44 shadow-custom-inset rounded-md"
+                ></div>
+            ))}
         </div>
     );
 }
