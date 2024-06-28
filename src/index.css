@@ -17,33 +17,6 @@
     animation: fadeInOut 1s infinite alternate; /* 3s duration, alternate infinite */
 }
 
-.magnifying-glass {
-    background-image: url("/magnifying-glass-solid.svg"),
-        linear-gradient(rgb(50, 30, 30), rgb(119, 90, 90));
-    background-repeat: no-repeat;
-    /* background-position: 1rem; */
-    /* background-position: 1rem center; Position the image horizontally at 1rem, centered vertically */
-    background-size: 1.5rem; /* Adjust the size to your preference */
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    border: solid 1px rgb(230, 184, 156);
-    border-radius: 5px;
-    background: url("/magnifying-glass-solid.svg") no-repeat 1rem white;
-    color: rgb(133, 133, 133);
-    font-size: 0.9rem;
-    font-family: Ruluko, sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.1rem;
-    min-width: 250px;
-    flex-basis: 25%;
-    padding-left: 2.5rem;
-    margin-left: 1rem;
-    height: 2rem;
-}
-
 .multiline-truncate-1 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -61,6 +34,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     height: 10em; /* Fit the number of lines */
+}
+
+.no-hover-effect {
+    transform: none !important;
+}
+
+.no-hover-effect:hover {
+    transform: none !important;
+    scale: none !important;
+    color: rgb(176, 176, 176) !important;
+    cursor: auto !important;
 }
 
 @keyframes fadeInOut {

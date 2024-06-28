@@ -6,7 +6,11 @@ import { IoSearch } from "react-icons/io5";
 import Loading from "./Loading";
 import { AppContext } from "./AppContext";
 
-export default function SearchTitles() {
+type SearchTitlesProps = {
+    mobile?: boolean;
+};
+
+export default function SearchTitles({ mobile }: SearchTitlesProps) {
     const { input, setInput, setIsSearchLoading, setSearchTitles } =
         useContext(AppContext);
 
@@ -49,7 +53,11 @@ export default function SearchTitles() {
     return (
         <div className="flex md:flex-col">
             <div className="mx-auto">
-                <SearchInputBar input={input} onChangeInput={setInput} />
+                <SearchInputBar
+                    input={input}
+                    onChangeInput={setInput}
+                    mobile={mobile}
+                />
             </div>
         </div>
     );
@@ -58,20 +66,30 @@ export default function SearchTitles() {
 type SearchInputBarProps = {
     input: string;
     onChangeInput: (value: string) => void;
+    mobile?: boolean;
 };
 
-export function SearchInputBar({ input, onChangeInput }: SearchInputBarProps) {
+export function SearchInputBar({
+    input,
+    onChangeInput,
+    mobile,
+}: SearchInputBarProps) {
     return (
-        <div className="flex bg-custom-gradient-6 px-1 py-2 rounded-md w-full max-w-[330px] focus-within:ring-2 focus-within:ring-custom-gray">
+        <div
+            className={`${
+                mobile
+                    ? ``
+                    : `bg-custom-gradient-6 focus-within:ring-2 focus-within:ring-custom-gray`
+            } flex px-1 py-2 rounded-md w-full md:w-[300px] lg:w-full lg:max-w-[330px]`}
+        >
             <span className="w-11">
                 <IoSearch className="size-8 xl:size-9 text-custom-gray" />
             </span>
-
             <input
                 value={input}
                 onChange={(e) => onChangeInput(e.currentTarget.value)}
                 placeholder="Search Titles"
-                className="bg-inherit rounded-md w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
+                className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
             />
         </div>
     );
@@ -84,7 +102,7 @@ export function SearchResults() {
         <>
             {input.trim() !== "" && (
                 <div className="mt-8">
-                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-gray">
+                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-white">
                         Search Results:
                     </h3>
                     {isSearchLoading ? (
