@@ -4,15 +4,23 @@ import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
-import SearchTitles from "../components/SearchTitles";
+import SearchTitles, { SearchResults } from "../components/SearchTitles";
 
 export default function HomePage() {
     return (
         <>
             <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
-                <SearchTitles />
-                <LoadAllGenres />
-                {/* <Loading /> */}
+                <div>
+                    <div>
+                        <div className="hidden md:block lg:hidden mt-8">
+                            <SearchTitles />
+                        </div>
+                        <SearchResults />
+                    </div>
+
+                    <LoadAllGenres />
+                    {/* <Loading /> */}
+                </div>
             </div>
             <Footer />
         </>

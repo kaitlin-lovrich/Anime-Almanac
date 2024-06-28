@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
-import { Title, TitleData } from "../lib/dataTypes";
+import { useContext, useEffect } from "react";
+import { Title } from "../lib/dataTypes";
 import TitleList from "./TitleList";
 import "../index.css";
 import { IoSearch } from "react-icons/io5";
 import Loading from "./Loading";
+import { AppContext } from "./AppContext";
 
 export default function SearchTitles() {
-    const [input, setInput] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [searchTitles, setSearchTitles] = useState<TitleData[]>([]);
+    const { input, setInput, setIsSearchLoading, setSearchTitles } =
+        useContext(AppContext);
 
     useEffect(() => {
         // Only perform the search if input is not empty
         if (input.trim() === "") {
             setSearchTitles([]);
-            setIsLoading(false);
+            setIsSearchLoading(false);
             return;
         }
 
-        setIsLoading(true);
+        setIsSearchLoading(true);
         async function loadSearchTitles() {
             try {
                 const response = await fetch(
@@ -37,46 +37,20 @@ export default function SearchTitles() {
             } catch (err) {
                 console.error(`Error: ${err}`);
             } finally {
-                setIsLoading(false);
+                setIsSearchLoading(false);
             }
         }
 
         const debounceTimer = setTimeout(loadSearchTitles, 500); // Debounce for 500ms
 
         return () => clearTimeout(debounceTimer); // Cleanup debounce timer on input change
-    }, [input]);
-
-    if (isLoading) {
-        <SearchInputBar input={input} onChangeInput={setInput} />;
-        <div className="mt-4 sm:mt-6 md:mt-8">
-            <h3 className="text-3xl font-heading px-14 py-2 text-[#B0B0B0]">
-                Search Results
-            </h3>
-            <Loading />;
-        </div>;
-    }
+    }, [input, setIsSearchLoading, setSearchTitles]);
 
     return (
-        <div className="flex flex-col">
-            <div className="mx-auto mt-4 sm:mt-6 md:mt-8">
+        <div className="flex md:flex-col">
+            <div className="mx-auto">
                 <SearchInputBar input={input} onChangeInput={setInput} />
             </div>
-            {input.trim() !== "" && (
-                <div className="mt-8">
-                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-gray">
-                        Search Results:
-                    </h3>
-                    {isLoading ? (
-                        <Loading searchResults={true} />
-                    ) : searchTitles.length > 0 ? (
-                        <TitleList titles={searchTitles} searchListKey={true} />
-                    ) : (
-                        <p className="text-custom-gray text-xl pt-4 h-[320px]">
-                            No titles found matching your search.
-                        </p>
-                    )}
-                </div>
-            )}
         </div>
     );
 }
@@ -88,14 +62,42 @@ type SearchInputBarProps = {
 
 export function SearchInputBar({ input, onChangeInput }: SearchInputBarProps) {
     return (
-        <div className="flex bg-custom-gradient-6 px-1 py-2 rounded-md w-[300px] focus-within:ring-2 focus-within:ring-custom-gray">
-            <IoSearch className="size-8 lg:size-9 text-custom-gray" />
+        <div className="flex bg-custom-gradient-6 px-1 py-2 rounded-md w-full max-w-[330px] focus-within:ring-2 focus-within:ring-custom-gray">
+            <span className="w-11">
+                <IoSearch className="size-8 xl:size-9 text-custom-gray" />
+            </span>
+
             <input
                 value={input}
                 onChange={(e) => onChangeInput(e.currentTarget.value)}
-                placeholder="Search"
-                className="bg-inherit pl-2 rounded-md w-[230px] text-custom-gray text-lg lg:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white"
+                placeholder="Search Titles"
+                className="bg-inherit rounded-md w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
             />
         </div>
+    );
+}
+
+export function SearchResults() {
+    const { input, isSearchLoading, searchTitles } = useContext(AppContext);
+
+    return (
+        <>
+            {input.trim() !== "" && (
+                <div className="mt-8">
+                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-gray">
+                        Search Results:
+                    </h3>
+                    {isSearchLoading ? (
+                        <Loading searchResults={true} />
+                    ) : searchTitles.length > 0 ? (
+                        <TitleList titles={searchTitles} searchListKey={true} />
+                    ) : (
+                        <p className="text-custom-gray text-xl pt-4 h-[320px]">
+                            No titles found matching your search.
+                        </p>
+                    )}
+                </div>
+            )}
+        </>
     );
 }

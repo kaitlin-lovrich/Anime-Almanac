@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { AppContext } from "./AppContext";
+import SearchTitles from "./SearchTitles";
 
 export default function Header() {
     const { setFilter } = useContext(AppContext);
@@ -10,7 +11,7 @@ export default function Header() {
         <>
             <nav className="flex lg:fixed top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
-                    <div className="w-60 lg:w-72 m-1 lg:m-2 hover:scale-105 duration-300">
+                    <div className="w-60 lg:w-64 xl:w-72 my-1 lg:my-2 hover:scale-105 duration-300">
                         <img
                             onClick={() => setFilter("Home")}
                             src="/Anime-Almanacs-logo.png"
@@ -18,8 +19,12 @@ export default function Header() {
                         />
                     </div>
                 </Link>
-                <div className="md:flex hidden justify-around items-center p-2 text-custom-gray md:*:text-xl lg:*:text-2xl *:font-heading *:p-4 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
+                <div className="md:flex hidden justify-around items-center p-2 text-custom-gray md:*:text-xl xl:*:text-2xl *:font-heading *:px-4 *:cursor-pointer hover:*:text-custom-white hover:*:scale-105 active:*:scale-105 *:duration-300">
                     <DesktopNavigation />
+                </div>
+
+                <div className="hidden lg:block pr-4 self-center">
+                    <SearchTitles />
                 </div>
             </nav>
             {location.pathname === "/" && (
@@ -27,7 +32,6 @@ export default function Header() {
                     <FilterOptions />
                 </div>
             )}
-
             <Outlet />
         </>
     );
