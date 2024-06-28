@@ -26,6 +26,9 @@ export default function App() {
         }
         return []; // Default to an empty array if no saved data is found
     });
+    const [input, setInput] = useState<string>("");
+    const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
+    const [searchTitles, setSearchTitles] = useState<TitleData[]>([]);
 
     // Save favorited titles to localStorage whenever they change
     useEffect(() => {
@@ -66,6 +69,12 @@ export default function App() {
         favoritedTitles,
         setFavoritedTitles,
         handleHeartClick,
+        input,
+        setInput,
+        isSearchLoading,
+        setIsSearchLoading,
+        searchTitles,
+        setSearchTitles,
     };
 
     return (

@@ -4,8 +4,30 @@ import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
+import SearchTitles, { SearchResults } from "../components/SearchTitles";
 
 export default function HomePage() {
+    return (
+        <>
+            <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
+                <div>
+                    <div>
+                        <div className="hidden md:block lg:hidden mt-8">
+                            <SearchTitles />
+                        </div>
+                        <SearchResults />
+                    </div>
+
+                    <LoadAllGenres />
+                    {/* <Loading /> */}
+                </div>
+            </div>
+            <Footer />
+        </>
+    );
+}
+
+function LoadAllGenres() {
     const [genres, setGenres] = useState<(GenreType | undefined)[]>([]);
     const [loadedGenresCount, setLoadedGenresCount] = useState(2);
     const [lastLoadedGenre, setLastLoadedGenre] = useState<string | null>(null);
@@ -56,7 +78,6 @@ export default function HomePage() {
                         ]);
                         setLoadedGenresCount((count) => count + 1);
                         setLastLoadedGenre(nextGenreName);
-                        console.log(nextGenreName);
                     }
                 }, 3500);
             } catch (err) {
@@ -91,14 +112,13 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
+            <div>
                 {genres.map((genre) => (
                     <GenreTitlesRow key={genre!.mal_id} genre={genre} />
                 ))}
                 {lastLoadedGenre !== "Suspense" && <Loading />}
                 <div ref={loadingRef}></div>
             </div>
-            <Footer />
         </>
     );
 }

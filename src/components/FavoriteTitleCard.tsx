@@ -43,8 +43,10 @@ export default function FavoriteTitleCard({ title }: FavoritetitleCardProps) {
                         {title.genres.map((genre) => genre.name).join("   ")}
                     </p>
                     <p className="whitespace-break-spaces hidden sm:block">
-                        {title.episodes} episodes {"   "}
-                        {title.duration}isode
+                        {title.episodes} episode
+                        {+title.episodes > 1 ? "s" : ""} {"  "}
+                        {title.duration}
+                        {title.duration.endsWith("ep") ? "isode" : ""}
                     </p>
                 </aside>
 

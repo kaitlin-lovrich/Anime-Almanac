@@ -36,6 +36,17 @@
     height: 10em; /* Fit the number of lines */
 }
 
+.no-hover-effect {
+    transform: none !important;
+}
+
+.no-hover-effect:hover {
+    transform: none !important;
+    scale: none !important;
+    color: rgb(176, 176, 176) !important;
+    cursor: auto !important;
+}
+
 @keyframes fadeInOut {
     0% {
         background-color: rgba(78, 54, 54); /* Start with high opacity */

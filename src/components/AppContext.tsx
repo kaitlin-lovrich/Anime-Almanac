@@ -12,6 +12,12 @@ type AppContextValues = {
     favoritedTitles: TitleData[];
     setFavoritedTitles: React.Dispatch<React.SetStateAction<TitleData[]>>;
     handleHeartClick: (title: TitleData) => void;
+    input: string;
+    setInput: React.Dispatch<React.SetStateAction<string>>;
+    isSearchLoading: boolean;
+    setIsSearchLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    searchTitles: TitleData[];
+    setSearchTitles: React.Dispatch<React.SetStateAction<TitleData[]>>;
 };
 
 export const AppContext = createContext<AppContextValues>({
@@ -20,4 +26,10 @@ export const AppContext = createContext<AppContextValues>({
     favoritedTitles: [],
     setFavoritedTitles: () => {},
     handleHeartClick: () => {},
+    input: "",
+    setInput: () => {},
+    isSearchLoading: false,
+    setIsSearchLoading: () => {},
+    searchTitles: [],
+    setSearchTitles: () => {},
 });

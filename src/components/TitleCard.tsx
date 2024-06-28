@@ -22,7 +22,7 @@ export default function TitleCard({ title }: TitleCardProps) {
             <div className="bg-[rgba(78,54,54,0.85)] mx-2 w-36 md:w-40 lg:w-44 h-20 md:h-24 shadow-custom-inset rounded-b-md">
                 <Link to={`title-page/${title.mal_id}`} state={{ title }}>
                     <p
-                        className="px-3 py-1 md:py-2 mx-auto cursor-pointer text-sm md:text-base text-[rgb(176,176,176)] tracking-wider multiline-truncate-1 h-full"
+                        className="px-3 py-1 md:py-2 mx-auto cursor-pointer text-sm md:text-base text-custom-gray tracking-wider multiline-truncate-1 h-full hover:text-custom-white active:text-custom-white"
                         onClick={() => setFilter(null)}
                     >
                         {title.title_english}
