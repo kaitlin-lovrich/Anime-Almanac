@@ -74,7 +74,8 @@ export function SearchInputBar({
     onChangeInput,
     mobile,
 }: SearchInputBarProps) {
-    const { setIsInputFocussed, isInputFocussed } = useContext(AppContext);
+    const { setIsInputFocussed, setIsSearchBarIconClicked } =
+        useContext(AppContext);
 
     return (
         <div
@@ -85,13 +86,17 @@ export function SearchInputBar({
             } flex px-1 py-2 rounded-md w-full md:w-[300px] lg:w-full lg:max-w-[330px]`}
         >
             <span className="w-11">
-                <IoSearch className="size-8 xl:size-9 text-custom-gray" />
+                <IoSearch
+                    className="size-8 xl:size-9 text-custom-gray"
+                    onMouseDown={() => setIsSearchBarIconClicked(true)}
+                    onMouseUp={() => setIsSearchBarIconClicked(false)}
+                />
             </span>
             <input
                 value={input}
                 onChange={(e) => onChangeInput(e.currentTarget.value)}
-                onFocus={() => setIsInputFocussed(!isInputFocussed)}
-                onBlur={() => setIsInputFocussed(!isInputFocussed)}
+                onFocus={() => setIsInputFocussed(true)}
+                onBlur={() => setIsInputFocussed(false)}
                 placeholder="Search Titles"
                 className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
             />

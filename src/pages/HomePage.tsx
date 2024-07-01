@@ -8,14 +8,14 @@ import SearchTitles, { SearchResults } from "../components/SearchTitles";
 import { AppContext } from "../components/AppContext";
 
 export default function HomePage() {
-    const { isInputFocussed } = useContext(AppContext);
+    const { isInputFocussed, isSearchBarIconClicked } = useContext(AppContext);
 
     useEffect(() => {
         // Scroll to the top of the page when the input is focused
-        if (isInputFocussed) {
+        if (isInputFocussed || isSearchBarIconClicked) {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
-    }, [isInputFocussed]);
+    }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
         <>
