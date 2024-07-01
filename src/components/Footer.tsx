@@ -11,9 +11,11 @@ export default function Footer() {
 
     useEffect(() => {
         // Scroll to the top of the page when the input is focused
-        if (isInputFocussed) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+        setTimeout(() => {
+            if (isInputFocussed) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }, 300);
     }, [isInputFocussed]);
 
     return (
