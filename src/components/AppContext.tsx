@@ -20,6 +20,8 @@ type AppContextValues = {
     setSearchTitles: React.Dispatch<React.SetStateAction<TitleData[]>>;
     isInputFocussed: boolean;
     setIsInputFocussed: React.Dispatch<React.SetStateAction<boolean>>;
+    isSearchBarIconClicked: boolean;
+    setIsSearchBarIconClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const AppContext = createContext<AppContextValues>({
@@ -36,4 +38,6 @@ export const AppContext = createContext<AppContextValues>({
     setSearchTitles: () => {},
     isInputFocussed: false,
     setIsInputFocussed: () => {},
+    isSearchBarIconClicked: false,
+    setIsSearchBarIconClicked: () => {},
 });
