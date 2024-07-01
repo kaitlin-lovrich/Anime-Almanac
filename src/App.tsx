@@ -29,6 +29,7 @@ export default function App() {
     const [input, setInput] = useState<string>("");
     const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
     const [searchTitles, setSearchTitles] = useState<TitleData[]>([]);
+    const [isInputFocussed, setIsInputFocussed] = useState<boolean>(false);
 
     // Save favorited titles to localStorage whenever they change
     useEffect(() => {
@@ -75,6 +76,8 @@ export default function App() {
         setIsSearchLoading,
         searchTitles,
         setSearchTitles,
+        isInputFocussed,
+        setIsInputFocussed,
     };
 
     return (
