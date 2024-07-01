@@ -45,7 +45,7 @@ export default function SearchTitles({ mobile }: SearchTitlesProps) {
             }
         }
 
-        const debounceTimer = setTimeout(loadSearchTitles, 500); // Debounce for 500ms
+        const debounceTimer = setTimeout(loadSearchTitles, 1200);
 
         return () => clearTimeout(debounceTimer); // Cleanup debounce timer on input change
     }, [input, setIsSearchLoading, setSearchTitles]);
@@ -74,6 +74,8 @@ export function SearchInputBar({
     onChangeInput,
     mobile,
 }: SearchInputBarProps) {
+    const { setIsInputFocussed, isInputFocussed } = useContext(AppContext);
+
     return (
         <div
             className={`${
@@ -88,6 +90,8 @@ export function SearchInputBar({
             <input
                 value={input}
                 onChange={(e) => onChangeInput(e.currentTarget.value)}
+                onFocus={() => setIsInputFocussed(!isInputFocussed)}
+                onBlur={() => setIsInputFocussed(!isInputFocussed)}
                 placeholder="Search Titles"
                 className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
             />

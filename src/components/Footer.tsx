@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaChevronLeft, FaRegHeart } from "react-icons/fa";
 import { HiMiniHome } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
@@ -7,6 +7,15 @@ import { Link } from "react-router-dom";
 import SearchTitles from "./SearchTitles";
 
 export default function Footer() {
+    const { isInputFocussed } = useContext(AppContext);
+
+    useEffect(() => {
+        // Scroll to the top of the page when the input is focused
+        if (isInputFocussed) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }, [isInputFocussed]);
+
     return (
         <>
             <MobileNavigation />

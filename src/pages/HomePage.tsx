@@ -1,12 +1,22 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { type GenreType } from "../lib/dataTypes";
 import GenreTitlesRow from "../components/GenreTitlesRow";
 import { genreData, genresToLoad } from "../lib/genreData";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
 import SearchTitles, { SearchResults } from "../components/SearchTitles";
+import { AppContext } from "../components/AppContext";
 
 export default function HomePage() {
+    const { isInputFocussed } = useContext(AppContext);
+
+    useEffect(() => {
+        // Scroll to the top of the page when the input is focused
+        if (isInputFocussed) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }, [isInputFocussed]);
+
     return (
         <>
             <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
@@ -17,9 +27,7 @@ export default function HomePage() {
                         </div>
                         <SearchResults />
                     </div>
-
                     <LoadAllGenres />
-                    {/* <Loading /> */}
                 </div>
             </div>
             <Footer />
