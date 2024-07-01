@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import SearchTitles from "./SearchTitles";
 
 export default function Footer() {
-    const { isInputFocussed } = useContext(AppContext);
+    const { isInputFocussed, isSearchBarIconClicked } = useContext(AppContext);
 
     useEffect(() => {
-        // Scroll to the top of the page when the input is focused
-        if (isInputFocussed) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-    }, [isInputFocussed]);
+        // Scroll to the top of the page when the input is focused or when search icon is clicked
+        setTimeout(() => {
+            if (isInputFocussed || isSearchBarIconClicked) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }, 300);
+    }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
         <>
