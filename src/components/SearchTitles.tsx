@@ -5,6 +5,7 @@ import "../index.css";
 import { IoSearch } from "react-icons/io5";
 import Loading from "./Loading";
 import { AppContext } from "./AppContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type SearchTitlesProps = {
     mobile?: boolean;
@@ -74,8 +75,22 @@ export function SearchInputBar({
     onChangeInput,
     mobile,
 }: SearchInputBarProps) {
-    const { setIsInputFocussed, setIsSearchBarIconClicked } =
+    const navigate = useNavigate();
+    const { setIsInputFocussed, setIsSearchBarIconClicked, setFilter } =
         useContext(AppContext);
+
+    const location = useLocation();
+
+    function handleSearchIconDown() {
+        setIsSearchBarIconClicked(true);
+        if (
+            location.pathname.includes("/title-page") ||
+            location.pathname.includes("/my-favorites")
+        ) {
+            setFilter("Home");
+            navigate(`/`);
+        }
+    }
 
     return (
         <div
@@ -88,7 +103,7 @@ export function SearchInputBar({
             <span className="w-11">
                 <IoSearch
                     className="size-8 xl:size-9 text-custom-gray"
-                    onMouseDown={() => setIsSearchBarIconClicked(true)}
+                    onMouseDown={() => handleSearchIconDown()}
                     onMouseUp={() => setIsSearchBarIconClicked(false)}
                 />
             </span>
