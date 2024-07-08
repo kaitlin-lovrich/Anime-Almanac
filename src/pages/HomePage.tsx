@@ -19,7 +19,7 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center mt-0 lg:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
+            <div className="flex flex-wrap justify-center mt-0 lg:mt-12 xl:mt-20 mb-24 mx-auto w-full lg:w-1/2 h-screen">
                 <div>
                     <div>
                         <div className="hidden md:block lg:hidden mt-8">

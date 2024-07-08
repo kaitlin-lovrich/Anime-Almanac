@@ -9,9 +9,9 @@ export default function Header() {
 
     return (
         <>
-            <nav className="flex lg:fixed top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
+            <nav className="flex lg:fixed py-0.5 xl:py-1 top-0 w-full z-50 md:justify-between bg-custom-gradient-2 shadow-custom-drop">
                 <Link to="/" className="link-logo">
-                    <div className="w-60 lg:w-64 xl:w-72 my-1 lg:my-2 hover:scale-105 duration-300">
+                    <div className="w-48 xl:w-56 hover:scale-105 duration-300">
                         <img
                             onClick={() => setFilter("Home")}
                             src="/Anime-Almanacs-logo.png"

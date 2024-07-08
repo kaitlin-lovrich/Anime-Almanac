@@ -47,6 +47,10 @@
     cursor: auto !important;
 }
 
+.margin-0 {
+    margin: 0 !important;
+}
+
 @keyframes fadeInOut {
     0% {
         background-color: rgba(78, 54, 54); /* Start with high opacity */
