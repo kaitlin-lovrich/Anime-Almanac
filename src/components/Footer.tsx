@@ -32,6 +32,8 @@ function MobileNavigation() {
     const footerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
+        let focusTimeout: NodeJS.Timeout;
+
         const handleResize = () => {
             if (window.visualViewport && footerRef.current) {
                 const { height } = window.visualViewport;
@@ -42,11 +44,15 @@ function MobileNavigation() {
         };
 
         const handleFocus = () => {
-            window.addEventListener("resize", handleResize);
-            handleResize();
+            // Delay the resize to ensure the keyboard is fully displayed
+            focusTimeout = setTimeout(() => {
+                window.addEventListener("resize", handleResize);
+                handleResize();
+            }, 300);
         };
 
         const handleBlur = () => {
+            clearTimeout(focusTimeout);
             window.removeEventListener("resize", handleResize);
             if (footerRef.current) {
                 footerRef.current.style.bottom = "0px";
