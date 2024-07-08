@@ -8,20 +8,29 @@ import SearchTitles from "./SearchTitles";
 
 export default function Footer() {
     const { isInputFocussed, isSearchBarIconClicked } = useContext(AppContext);
+    const footerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         // Scroll to the top of the page when the input is focused or when search icon is clicked
-        setTimeout(() => {
-            if (isInputFocussed || isSearchBarIconClicked) {
+
+        if (isInputFocussed || isSearchBarIconClicked) {
+            setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        }, 300);
+                // Ensure the footer remains above the keyboard
+                if (window.visualViewport && footerRef.current) {
+                    const { height } = window.visualViewport;
+                    footerRef.current.style.bottom = `${
+                        window.innerHeight - height
+                    }px`;
+                }
+            }, 3000);
+        }
     }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
-        <>
+        <div ref={footerRef}>
             <MobileNavigation />
-        </>
+        </div>
     );
 }
 
@@ -48,7 +57,7 @@ function MobileNavigation() {
             focusTimeout = setTimeout(() => {
                 window.addEventListener("resize", handleResize);
                 handleResize();
-            }, 3000);
+            }, 300);
         };
 
         const handleBlur = () => {
