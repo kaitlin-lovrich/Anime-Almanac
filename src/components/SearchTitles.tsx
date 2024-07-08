@@ -52,8 +52,8 @@ export default function SearchTitles({ mobile }: SearchTitlesProps) {
     }, [input, setIsSearchLoading, setSearchTitles]);
 
     return (
-        <div className="flex md:flex-col">
-            <div className="mx-auto">
+        <div className="flex margin-0 md:flex-col">
+            <div className="flex mx-auto items-center">
                 <SearchInputBar
                     input={input}
                     onChangeInput={setInput}
@@ -98,11 +98,11 @@ export function SearchInputBar({
                 mobile
                     ? ``
                     : `bg-custom-gradient-6 focus-within:ring-2 focus-within:ring-custom-gray`
-            } flex px-1 py-2 rounded-md w-full md:w-[300px] lg:w-full lg:max-w-[330px]`}
+            } flex px-1 py-1 md:py-1.5 lg:py-1 xl:py-1.5 rounded-md w-full md:w-[300px] lg:w-full lg:max-w-[330px]`}
         >
-            <span className="w-11">
+            <span className="w-9 xl:w-11">
                 <IoSearch
-                    className="size-8 xl:size-9 text-custom-gray"
+                    className="size-7 xl:size-8 text-custom-gray"
                     onMouseDown={() => handleSearchIconDown()}
                     onMouseUp={() => setIsSearchBarIconClicked(false)}
                 />
@@ -113,7 +113,7 @@ export function SearchInputBar({
                 onFocus={() => setIsInputFocussed(true)}
                 onBlur={() => setIsInputFocussed(false)}
                 placeholder="Search Titles"
-                className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-lg xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4"
+                className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-base xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4 self-end"
             />
         </div>
     );
