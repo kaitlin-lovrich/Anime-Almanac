@@ -15,7 +15,7 @@ export default function Footer() {
             if (isInputFocussed || isSearchBarIconClicked) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
-        }, 300);
+        }, 3000);
     }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
