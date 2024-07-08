@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaRegHeart } from "react-icons/fa";
 import { HiMiniHome } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
@@ -29,9 +29,51 @@ function MobileNavigation() {
     const { filter, setFilter } = useContext(AppContext);
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 
+    const footerRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.visualViewport && footerRef.current) {
+                const { height } = window.visualViewport;
+                footerRef.current.style.bottom = `${
+                    window.innerHeight - height
+                }px`;
+            }
+        };
+
+        const handleFocus = () => {
+            window.addEventListener("resize", handleResize);
+            handleResize();
+        };
+
+        const handleBlur = () => {
+            window.removeEventListener("resize", handleResize);
+            if (footerRef.current) {
+                footerRef.current.style.bottom = "0px";
+            }
+        };
+
+        const inputs = document.querySelectorAll("input, textarea");
+        inputs.forEach((input) => {
+            input.addEventListener("focus", handleFocus);
+            input.addEventListener("blur", handleBlur);
+        });
+
+        return () => {
+            inputs.forEach((input) => {
+                input.removeEventListener("focus", handleFocus);
+                input.removeEventListener("blur", handleBlur);
+            });
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <>
-            <nav className="md:hidden flex items-center fixed bottom-0 w-full z-50 justify-center bg-custom-gradient-1 shadow-custom-drop">
+            <nav
+                ref={footerRef}
+                className="md:hidden flex items-center fixed bottom-0 w-full z-50 justify-center bg-custom-gradient-1 shadow-custom-drop"
+            >
                 {isSearchBarOpen && (
                     <span>
                         <FaChevronLeft
