@@ -15,7 +15,7 @@ export default function Footer() {
             if (isInputFocussed || isSearchBarIconClicked) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
-        }, 3000);
+        }, 300);
     }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
@@ -48,7 +48,7 @@ function MobileNavigation() {
             focusTimeout = setTimeout(() => {
                 window.addEventListener("resize", handleResize);
                 handleResize();
-            }, 300);
+            }, 3000);
         };
 
         const handleBlur = () => {
