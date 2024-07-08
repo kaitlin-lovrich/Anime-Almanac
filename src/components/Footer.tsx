@@ -23,7 +23,7 @@ export default function Footer() {
                         window.innerHeight - height
                     }px`;
                 }
-            }, 3000);
+            }, 300);
         }
     }, [isInputFocussed, isSearchBarIconClicked]);
 
