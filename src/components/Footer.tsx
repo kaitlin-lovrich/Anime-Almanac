@@ -12,33 +12,52 @@ export default function Footer() {
 
     useEffect(() => {
         const adjustFooterPosition = () => {
-            if (window.visualViewport && footerRef.current) {
-                const { height } = window.visualViewport;
-                footerRef.current.style.bottom = `${
-                    window.innerHeight - height
-                }px`;
-            } else {
-                if (footerRef.current) {
+            if (footerRef.current) {
+                const visualViewport = window.visualViewport;
+                if (visualViewport) {
+                    const { height } = visualViewport;
+                    footerRef.current.style.bottom = `${
+                        window.innerHeight - height
+                    }px`;
+                } else {
                     footerRef.current.style.bottom = "0px";
                 }
             }
         };
 
-        // Adjust the footer position when the input is focused or when the search icon is clicked
-        if (isInputFocussed || isSearchBarIconClicked) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+        const handleResizeAndScroll = () => {
             adjustFooterPosition();
+        };
+
+        if (isInputFocussed || isSearchBarIconClicked) {
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                adjustFooterPosition();
+            }, 600);
+        } else {
+            if (footerRef.current) {
+                footerRef.current.style.bottom = "0px";
+            }
         }
 
-        if (!window.visualViewport) return;
+        const visualViewport = window.visualViewport;
 
-        // Adjust the footer position on viewport resize
-        window.visualViewport.onresize = adjustFooterPosition;
+        if (visualViewport) {
+            visualViewport.addEventListener("resize", handleResizeAndScroll);
+            visualViewport.addEventListener("scroll", handleResizeAndScroll);
+        }
 
-        // Cleanup event listener on component unmount
         return () => {
-            if (!window.visualViewport) return;
-            window.visualViewport.onresize = null;
+            if (visualViewport) {
+                visualViewport.removeEventListener(
+                    "resize",
+                    handleResizeAndScroll
+                );
+                visualViewport.removeEventListener(
+                    "scroll",
+                    handleResizeAndScroll
+                );
+            }
         };
     }, [isInputFocussed, isSearchBarIconClicked]);
 
