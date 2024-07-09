@@ -15,6 +15,7 @@ export default function Footer() {
 
         if (isInputFocussed || isSearchBarIconClicked) {
             setTimeout(() => {
+                console.log("Scrolling to top");
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 // Ensure the footer remains above the keyboard
                 if (window.visualViewport && footerRef.current) {
@@ -22,6 +23,10 @@ export default function Footer() {
                     footerRef.current.style.bottom = `${
                         window.innerHeight - height
                     }px`;
+                    console.log(
+                        "Setting footer bottom during input focus",
+                        footerRef.current.style.bottom
+                    );
                 }
             }, 600);
         }
@@ -36,10 +41,15 @@ export default function Footer() {
                 footerRef.current.style.bottom = `${
                     window.innerHeight - height
                 }px`;
+                console.log(
+                    "Handling resize, setting footer bottom",
+                    footerRef.current.style.bottom
+                );
             }
         };
 
         const handleFocus = () => {
+            console.log("Input focused");
             // Delay the resize to ensure the keyboard is fully displayed
             focusTimeout = setTimeout(() => {
                 window.addEventListener("resize", handleResize);
@@ -48,11 +58,20 @@ export default function Footer() {
         };
 
         const handleBlur = () => {
+            console.log("Input blurred");
+
             clearTimeout(focusTimeout);
             window.removeEventListener("resize", handleResize);
-            if (footerRef.current) {
-                footerRef.current.style.bottom = "0px";
-            }
+
+            focusTimeout = setTimeout(() => {
+                if (footerRef.current) {
+                    footerRef.current.style.bottom = "0px";
+                    console.log(
+                        "Setting footer bottom to 0",
+                        footerRef.current.style.bottom
+                    );
+                }
+            }, 300);
         };
 
         const inputs = document.querySelectorAll("input, textarea");
