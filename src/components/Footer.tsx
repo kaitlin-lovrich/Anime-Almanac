@@ -13,9 +13,8 @@ export default function Footer() {
     useEffect(() => {
         const adjustFooterPosition = () => {
             if (footerRef.current) {
-                const visualViewport = window.visualViewport;
-                if (visualViewport) {
-                    const { height } = visualViewport;
+                if (window.visualViewport) {
+                    const { height } = window.visualViewport;
                     footerRef.current.style.bottom = `${
                         window.innerHeight - height
                     }px`;
@@ -33,27 +32,31 @@ export default function Footer() {
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 adjustFooterPosition();
-            }, 600);
+            }, 300);
         } else {
             if (footerRef.current) {
                 footerRef.current.style.bottom = "0px";
             }
         }
 
-        const visualViewport = window.visualViewport;
-
-        if (visualViewport) {
-            visualViewport.addEventListener("resize", handleResizeAndScroll);
-            visualViewport.addEventListener("scroll", handleResizeAndScroll);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener(
+                "resize",
+                handleResizeAndScroll
+            );
+            window.visualViewport.addEventListener(
+                "scroll",
+                handleResizeAndScroll
+            );
         }
 
         return () => {
-            if (visualViewport) {
-                visualViewport.removeEventListener(
+            if (window.visualViewport) {
+                window.visualViewport.removeEventListener(
                     "resize",
                     handleResizeAndScroll
                 );
-                visualViewport.removeEventListener(
+                window.visualViewport.removeEventListener(
                     "scroll",
                     handleResizeAndScroll
                 );
