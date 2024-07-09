@@ -29,7 +29,7 @@ export default function Footer() {
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 adjustFooterPosition();
-            }, 600);
+            }, 100);
         }
 
         if (!window.visualViewport) return;
