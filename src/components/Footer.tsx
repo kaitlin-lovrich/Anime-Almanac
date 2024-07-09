@@ -11,83 +11,38 @@ export default function Footer() {
     const footerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        // Scroll to the top of the page when the input is focused or when search icon is clicked
-
-        if (isInputFocussed || isSearchBarIconClicked) {
-            setTimeout(() => {
-                console.log("Scrolling to top");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                // Ensure the footer remains above the keyboard
-                if (window.visualViewport && footerRef.current) {
-                    const { height } = window.visualViewport;
-                    footerRef.current.style.bottom = `${
-                        window.innerHeight - height
-                    }px`;
-                    console.log(
-                        "Setting footer bottom during input focus",
-                        footerRef.current.style.bottom
-                    );
-                }
-            }, 600);
-        }
-    }, [isInputFocussed, isSearchBarIconClicked]);
-
-    useEffect(() => {
-        let focusTimeout: NodeJS.Timeout;
-
-        const handleResize = () => {
+        const adjustFooterPosition = () => {
             if (window.visualViewport && footerRef.current) {
                 const { height } = window.visualViewport;
                 footerRef.current.style.bottom = `${
                     window.innerHeight - height
                 }px`;
-                console.log(
-                    "Handling resize, setting footer bottom",
-                    footerRef.current.style.bottom
-                );
+            } else {
+                if (footerRef.current) {
+                    footerRef.current.style.bottom = "0px";
+                }
             }
         };
 
-        const handleFocus = () => {
-            console.log("Input focused");
-            // Delay the resize to ensure the keyboard is fully displayed
-            focusTimeout = setTimeout(() => {
-                window.addEventListener("resize", handleResize);
-                handleResize();
-            }, 300);
-        };
+        // Adjust the footer position when the input is focused or when the search icon is clicked
+        if (isInputFocussed || isSearchBarIconClicked) {
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                adjustFooterPosition();
+            }, 600);
+        }
 
-        const handleBlur = () => {
-            console.log("Input blurred");
+        if (!window.visualViewport) return;
 
-            clearTimeout(focusTimeout);
-            window.removeEventListener("resize", handleResize);
+        // Adjust the footer position on viewport resize
+        window.visualViewport.onresize = adjustFooterPosition;
 
-            focusTimeout = setTimeout(() => {
-                if (footerRef.current) {
-                    footerRef.current.style.bottom = "0px";
-                    console.log(
-                        "Setting footer bottom to 0",
-                        footerRef.current.style.bottom
-                    );
-                }
-            }, 300);
-        };
-
-        const inputs = document.querySelectorAll("input, textarea");
-        inputs.forEach((input) => {
-            input.addEventListener("focus", handleFocus);
-            input.addEventListener("blur", handleBlur);
-        });
-
+        // Cleanup event listener on component unmount
         return () => {
-            inputs.forEach((input) => {
-                input.removeEventListener("focus", handleFocus);
-                input.removeEventListener("blur", handleBlur);
-            });
-            window.removeEventListener("resize", handleResize);
+            if (!window.visualViewport) return;
+            window.visualViewport.onresize = null;
         };
-    }, []);
+    }, [isInputFocussed, isSearchBarIconClicked]);
 
     return (
         <nav
