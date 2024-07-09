@@ -12,25 +12,29 @@ export default function Footer() {
 
     useEffect(() => {
         // Scroll to the top of the page when the input is focused or when search icon is clicked
-
         if (isInputFocussed || isSearchBarIconClicked) {
             setTimeout(() => {
-                console.log("Scrolling to top");
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 // Ensure the footer remains above the keyboard
                 if (window.visualViewport && footerRef.current) {
+                    console.log("window.visualViewport", window.visualViewport);
+                    console.log(
+                        "window.visualViewport.onresize",
+                        window.visualViewport.onresize
+                    );
+                    console.log("footerRef.current", footerRef.current);
                     const { height } = window.visualViewport;
                     footerRef.current.style.bottom = `${
                         window.innerHeight - height
                     }px`;
-                    console.log(
-                        "Setting footer bottom during input focus",
-                        footerRef.current.style.bottom
-                    );
                 }
             }, 600);
         }
     }, [isInputFocussed, isSearchBarIconClicked]);
+
+    useEffect(() => {
+        console.log("isInputFocussed", isInputFocussed);
+    });
 
     useEffect(() => {
         let focusTimeout: NodeJS.Timeout;
@@ -41,15 +45,10 @@ export default function Footer() {
                 footerRef.current.style.bottom = `${
                     window.innerHeight - height
                 }px`;
-                console.log(
-                    "Handling resize, setting footer bottom",
-                    footerRef.current.style.bottom
-                );
             }
         };
 
         const handleFocus = () => {
-            console.log("Input focused");
             // Delay the resize to ensure the keyboard is fully displayed
             focusTimeout = setTimeout(() => {
                 window.addEventListener("resize", handleResize);
@@ -58,30 +57,29 @@ export default function Footer() {
         };
 
         const handleBlur = () => {
-            console.log("Input blurred");
-
             clearTimeout(focusTimeout);
             window.removeEventListener("resize", handleResize);
 
             focusTimeout = setTimeout(() => {
                 if (footerRef.current) {
                     footerRef.current.style.bottom = "0px";
-                    console.log(
-                        "Setting footer bottom to 0",
-                        footerRef.current.style.bottom
-                    );
                 }
             }, 300);
         };
 
         const inputs = document.querySelectorAll("input, textarea");
+        // console.log("Adding focus and blur event listeners to inputs");
         inputs.forEach((input) => {
+            // console.log("input", input);
             input.addEventListener("focus", handleFocus);
             input.addEventListener("blur", handleBlur);
         });
 
         return () => {
             inputs.forEach((input) => {
+                // console.log(
+                //     "Removing focus and blur event listeners from inputs"
+                // );
                 input.removeEventListener("focus", handleFocus);
                 input.removeEventListener("blur", handleBlur);
             });
