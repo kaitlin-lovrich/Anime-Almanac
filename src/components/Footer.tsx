@@ -29,10 +29,8 @@ export default function Footer() {
         };
 
         if (isInputFocussed || isSearchBarIconClicked) {
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                adjustFooterPosition();
-            }, 300);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            adjustFooterPosition();
         } else {
             if (footerRef.current) {
                 footerRef.current.style.bottom = "0px";
