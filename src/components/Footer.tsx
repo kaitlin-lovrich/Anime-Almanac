@@ -26,10 +26,8 @@ export default function Footer() {
 
         // Adjust the footer position when the input is focused or when the search icon is clicked
         if (isInputFocussed || isSearchBarIconClicked) {
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                adjustFooterPosition();
-            }, 100);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            adjustFooterPosition();
         }
 
         if (!window.visualViewport) return;
