@@ -54,18 +54,22 @@ export default function Header() {
 }
 
 function DesktopNavigation() {
-    const { filter } = useContext(AppContext);
+    const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
             <Link to="/">
-                <span className={filter === "Home" ? "text-custom-white" : ""}>
+                <span
+                    onClick={() => setFilter("Home")}
+                    className={filter === "Home" ? "text-custom-white" : ""}
+                >
                     Home
                 </span>
             </Link>
             <FilterOptions />
             <Link to="/my-favorites">
                 <span
+                    onClick={() => setFilter("My Favorites")}
                     className={
                         filter === "My Favorites" ? "text-custom-white" : ""
                     }
@@ -78,18 +82,20 @@ function DesktopNavigation() {
 }
 
 function FilterOptions() {
-    const { filter } = useContext(AppContext);
+    const { filter, setFilter } = useContext(AppContext);
 
     return (
         <>
             <Link
                 to="/"
+                onClick={() => setFilter("TV Shows")}
                 className={filter === "TV Shows" ? "text-custom-white" : ""}
             >
                 TV Shows
             </Link>
             <Link
                 to="/"
+                onClick={() => setFilter("Movies")}
                 className={filter === "Movies" ? "text-custom-white" : ""}
             >
                 Movies
