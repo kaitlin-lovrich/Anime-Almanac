@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import SearchTitles from "./SearchTitles";
@@ -6,6 +6,22 @@ import SearchTitles from "./SearchTitles";
 export default function Header() {
     const { setFilter } = useContext(AppContext);
     const location = useLocation();
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/tv-shows":
+                setFilter("TV Shows");
+                break;
+            case "/movies":
+                setFilter("Movies");
+                break;
+            case "/my-favorites":
+                setFilter("My Favorites");
+                break;
+            default:
+                setFilter("Home");
+        }
+    }, [location.pathname, setFilter]);
 
     return (
         <>
@@ -38,22 +54,18 @@ export default function Header() {
 }
 
 function DesktopNavigation() {
-    const { filter, setFilter } = useContext(AppContext);
+    const { filter } = useContext(AppContext);
 
     return (
         <>
             <Link to="/">
-                <span
-                    onClick={() => setFilter("Home")}
-                    className={filter === "Home" ? "text-custom-white" : ""}
-                >
+                <span className={filter === "Home" ? "text-custom-white" : ""}>
                     Home
                 </span>
             </Link>
             <FilterOptions />
             <Link to="/my-favorites">
                 <span
-                    onClick={() => setFilter("My Favorites")}
                     className={
                         filter === "My Favorites" ? "text-custom-white" : ""
                     }
@@ -66,20 +78,18 @@ function DesktopNavigation() {
 }
 
 function FilterOptions() {
-    const { filter, setFilter } = useContext(AppContext);
+    const { filter } = useContext(AppContext);
 
     return (
         <>
             <Link
                 to="/"
-                onClick={() => setFilter("TV Shows")}
                 className={filter === "TV Shows" ? "text-custom-white" : ""}
             >
                 TV Shows
             </Link>
             <Link
                 to="/"
-                onClick={() => setFilter("Movies")}
                 className={filter === "Movies" ? "text-custom-white" : ""}
             >
                 Movies
