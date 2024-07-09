@@ -9,11 +9,8 @@ export default function Header() {
 
     useEffect(() => {
         switch (location.pathname) {
-            case "/tv-shows":
-                setFilter("TV Shows");
-                break;
-            case "/movies":
-                setFilter("Movies");
+            case "/title-page/:id":
+                setFilter(null);
                 break;
             case "/my-favorites":
                 setFilter("My Favorites");
