@@ -26,14 +26,14 @@ export default function Footer() {
 
         const handleFocusSearch = () => {
             if (isInputFocussed || isSearchBarIconClicked) {
-                setTimeout(() => {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                    adjustFooterPosition();
-                }, 300);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                adjustFooterPosition();
             } else {
-                if (footerRef.current) {
-                    footerRef.current.style.bottom = "0px";
-                }
+                setTimeout(() => {
+                    if (footerRef.current) {
+                        footerRef.current.style.bottom = "0px";
+                    }
+                }, 300);
             }
         };
 
