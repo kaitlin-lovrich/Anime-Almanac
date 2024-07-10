@@ -26,8 +26,10 @@ export default function Footer() {
 
         const handleFocusSearch = () => {
             if (isInputFocussed || isSearchBarIconClicked) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                adjustFooterPosition();
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    adjustFooterPosition();
+                }, 300);
             } else {
                 setTimeout(() => {
                     if (footerRef.current) {
