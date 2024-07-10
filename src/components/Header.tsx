@@ -9,14 +9,14 @@ export default function Header() {
 
     useEffect(() => {
         switch (location.pathname) {
-            case "/title-page/:id":
-                setFilter(null);
+            case "/":
+                setFilter("Home");
                 break;
             case "/my-favorites":
                 setFilter("My Favorites");
                 break;
             default:
-                setFilter("Home");
+                setFilter(null);
         }
     }, [location.pathname, setFilter]);
 

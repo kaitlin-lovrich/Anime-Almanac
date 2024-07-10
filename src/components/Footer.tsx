@@ -35,7 +35,7 @@ export default function Footer() {
                     if (footerRef.current) {
                         footerRef.current.style.bottom = "0px";
                     }
-                }, 600);
+                }, 400);
             }
         };
 
