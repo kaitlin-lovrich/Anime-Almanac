@@ -29,13 +29,13 @@ export default function Footer() {
                 setTimeout(() => {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                     adjustFooterPosition();
-                }, 600);
+                }, 300);
             } else {
                 setTimeout(() => {
                     if (footerRef.current) {
                         footerRef.current.style.bottom = "0px";
                     }
-                }, 300);
+                }, 600);
             }
         };
 
