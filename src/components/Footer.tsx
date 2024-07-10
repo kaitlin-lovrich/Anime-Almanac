@@ -24,27 +24,29 @@ export default function Footer() {
             }
         };
 
-        const handleResizeAndScroll = () => {
-            adjustFooterPosition();
+        const handleFocusSearch = () => {
+            if (isInputFocussed || isSearchBarIconClicked) {
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    adjustFooterPosition();
+                }, 300);
+            } else {
+                if (footerRef.current) {
+                    footerRef.current.style.bottom = "0px";
+                }
+            }
         };
 
-        if (isInputFocussed || isSearchBarIconClicked) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            adjustFooterPosition();
-        } else {
-            if (footerRef.current) {
-                footerRef.current.style.bottom = "0px";
-            }
-        }
+        handleFocusSearch();
 
         if (window.visualViewport) {
             window.visualViewport.addEventListener(
                 "resize",
-                handleResizeAndScroll
+                adjustFooterPosition
             );
             window.visualViewport.addEventListener(
                 "scroll",
-                handleResizeAndScroll
+                adjustFooterPosition
             );
         }
 
@@ -52,11 +54,11 @@ export default function Footer() {
             if (window.visualViewport) {
                 window.visualViewport.removeEventListener(
                     "resize",
-                    handleResizeAndScroll
+                    adjustFooterPosition
                 );
                 window.visualViewport.removeEventListener(
                     "scroll",
-                    handleResizeAndScroll
+                    adjustFooterPosition
                 );
             }
         };
