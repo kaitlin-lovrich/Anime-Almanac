@@ -29,7 +29,7 @@ export default function Footer() {
                 setTimeout(() => {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                     adjustFooterPosition();
-                }, 300);
+                }, 600);
             } else {
                 setTimeout(() => {
                     if (footerRef.current) {
