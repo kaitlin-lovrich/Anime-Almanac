@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TitleData } from "../lib/dataTypes";
-import TitleCard from "./TitleCard";
+import { TitleCard } from "./index";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 type TitleListProps = {
@@ -8,7 +8,7 @@ type TitleListProps = {
     searchListKey?: boolean;
 };
 
-export default function TitleList({ titles, searchListKey }: TitleListProps) {
+export function TitleList({ titles, searchListKey }: TitleListProps) {
     const [current, setCurrent] = useState(0);
     const [itemsToShow, setItemsToShow] = useState(6);
 

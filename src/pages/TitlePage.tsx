@@ -2,10 +2,9 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TitleData } from "../lib/dataTypes";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
-import { AppContext } from "../components/AppContext";
+import { AppContext, Footer } from "../components/index";
 
-export default function TitlePage() {
+export function TitlePage() {
     const [isSaved, setisSaved] = useState(false);
     const [showMore, setShowMore] = useState(false);
     const location = useLocation();

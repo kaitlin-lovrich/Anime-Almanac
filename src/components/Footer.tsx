@@ -2,11 +2,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaRegHeart } from "react-icons/fa";
 import { HiMiniHome } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
-import { AppContext } from "./AppContext";
 import { Link } from "react-router-dom";
-import SearchTitles from "./SearchTitles";
+import { AppContext, SearchTitles } from "./index";
 
-export default function Footer() {
+export function Footer() {
     const { isInputFocussed, isSearchBarIconClicked } = useContext(AppContext);
     const footerRef = useRef<HTMLDivElement | null>(null);
 

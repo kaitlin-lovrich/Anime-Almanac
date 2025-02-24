@@ -1,11 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Header from "./components/Header";
-import { AppContext } from "./components/AppContext";
+import { HomePage, MyFavoritesPage, TitlePage } from "./pages/index";
+import { AppContext, Header } from "./components/index";
 import { useEffect, useState } from "react";
-import TitlePage from "./pages/TitlePage";
 import { TitleData } from "./lib/dataTypes";
-import MyFavoritesPage from "./pages/MyFavoritesPage";
 
 export default function App() {
     const [filter, setFilter] = useState<

@@ -1,17 +1,15 @@
 import { useContext, useEffect } from "react";
 import { Title } from "../lib/dataTypes";
-import TitleList from "./TitleList";
+import { TitleList, Loading, AppContext } from "./index";
 import "../index.css";
 import { IoSearch } from "react-icons/io5";
-import Loading from "./Loading";
-import { AppContext } from "./AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type SearchTitlesProps = {
     mobile?: boolean;
 };
 
-export default function SearchTitles({ mobile }: SearchTitlesProps) {
+export function SearchTitles({ mobile }: SearchTitlesProps) {
     const { input, setInput, setIsSearchLoading, setSearchTitles } =
         useContext(AppContext);
 

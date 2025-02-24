@@ -5,7 +5,7 @@ type LoadingProps = {
     searchResults?: boolean;
 };
 
-export default function Loading({ searchResults }: LoadingProps) {
+export function Loading({ searchResults }: LoadingProps) {
     const [itemsToShow, setItemsToShow] = useState(6);
 
     function updateItemsToShow() {
