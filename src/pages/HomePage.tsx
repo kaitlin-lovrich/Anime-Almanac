@@ -1,13 +1,16 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { type GenreType } from "../lib/dataTypes";
-import GenreTitlesRow from "../components/GenreTitlesRow";
+import {
+    GenreTitlesRow,
+    Loading,
+    Footer,
+    SearchTitles,
+    SearchResults,
+} from "../components/index";
 import { genreData, genresToLoad } from "../lib/genreData";
-import Loading from "../components/Loading";
-import Footer from "../components/Footer";
-import SearchTitles, { SearchResults } from "../components/SearchTitles";
 import { AppContext } from "../components/AppContext";
 
-export default function HomePage() {
+export function HomePage() {
     const { isInputFocussed, isSearchBarIconClicked } = useContext(AppContext);
 
     useEffect(() => {

@@ -1,9 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { AppContext } from "./AppContext";
-import SearchTitles from "./SearchTitles";
+import { SearchTitles, AppContext } from "./index";
 
-export default function Header() {
+export function Header() {
     const { setFilter } = useContext(AppContext);
     const location = useLocation();
 

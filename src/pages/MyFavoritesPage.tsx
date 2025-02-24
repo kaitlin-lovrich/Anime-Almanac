@@ -1,9 +1,7 @@
 import { useContext, useEffect } from "react";
-import Footer from "../components/Footer";
-import { AppContext } from "../components/AppContext";
-import FavoriteTitleCard from "../components/FavoriteTitleCard";
+import { AppContext, Footer, FavoriteTitleCard } from "../components/index";
 
-export default function MyFavoritesPage() {
+export function MyFavoritesPage() {
     const { setFilter, favoritedTitles } = useContext(AppContext);
 
     useEffect(() => {

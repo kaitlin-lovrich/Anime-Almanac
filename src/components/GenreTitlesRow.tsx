@@ -1,16 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { GenreType, Title, TitleData } from "../lib/dataTypes";
-import Genre from "./Genre";
-import TitleList from "./TitleList";
-import Loading from "./Loading";
-import ErrorMessage from "./ErrorMessage";
+import { Genre, TitleList, Loading, ErrorMessage } from "./index";
 import { AppContext } from "./AppContext";
 
 type GenreTitlesRowProps = {
     genre: GenreType | undefined;
 };
 
-export default function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
+export function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
     const [genreTitles, setGenreTitles] = useState<TitleData[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);

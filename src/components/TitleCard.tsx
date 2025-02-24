@@ -1,14 +1,14 @@
 import { TitleData } from "../lib/dataTypes";
 import "../index.css";
 import { Link } from "react-router-dom";
-import { AppContext } from "./AppContext";
+import { AppContext } from "./index";
 import { useContext } from "react";
 
 type TitleCardProps = {
     title: TitleData;
 };
 
-export default function TitleCard({ title }: TitleCardProps) {
+export function TitleCard({ title }: TitleCardProps) {
     const { setFilter } = useContext(AppContext);
     return (
         <>

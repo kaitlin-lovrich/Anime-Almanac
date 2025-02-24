@@ -1,6 +1,6 @@
 import { TitleData } from "../lib/dataTypes";
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "./index";
 import { FaHeartCircleXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ type FavoritetitleCardProps = {
     title: TitleData;
 };
 
-export default function FavoriteTitleCard({ title }: FavoritetitleCardProps) {
+export function FavoriteTitleCard({ title }: FavoritetitleCardProps) {
     const { handleHeartClick, setFilter } = useContext(AppContext);
 
     return (
