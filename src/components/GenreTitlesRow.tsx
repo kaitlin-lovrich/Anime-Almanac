@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GenreType, Title, TitleData } from "../lib/dataTypes";
-import { Genre, TitleList, Loading, ErrorMessage } from "./index";
-import { AppContext } from "./AppContext";
+import { AppContext, Genre, TitleList, Loading, ErrorMessage } from "./index";
 
 type GenreTitlesRowProps = {
     genre: GenreType | undefined;
@@ -18,15 +17,17 @@ export function GenreTitlesRow({ genre }: GenreTitlesRowProps) {
         setIsLoading(true);
         async function loadTitles() {
             try {
+                const typeFilter =
+                    filter === "TV Shows"
+                        ? "tv"
+                        : filter === "Movies"
+                        ? "movie"
+                        : "";
                 // Formulate the API endpoint URL with the filter and genre
                 const response = await fetch(
                     `https://api.jikan.moe/v4/anime?order_by=popularity&genres=${
                         genre!.mal_id
-                    }${
-                        filter
-                            ? `&type=${filter === "TV Shows" ? "tv" : "movie"}`
-                            : ""
-                    }`
+                    }${typeFilter ? `&type=${typeFilter}` : ""}`
                 );
 
                 if (!response.ok)

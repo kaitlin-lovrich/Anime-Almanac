@@ -1,6 +1,11 @@
 import { useContext, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { SearchTitles, AppContext } from "./index";
+import {
+    SearchTitles,
+    AppContext,
+    FilterOptions,
+    DesktopNavigation,
+} from "./index";
 
 export function Header() {
     const { setFilter } = useContext(AppContext);
@@ -45,57 +50,6 @@ export function Header() {
                 </div>
             )}
             <Outlet />
-        </>
-    );
-}
-
-function DesktopNavigation() {
-    const { filter, setFilter } = useContext(AppContext);
-
-    return (
-        <>
-            <Link to="/">
-                <span
-                    onClick={() => setFilter("Home")}
-                    className={filter === "Home" ? "text-custom-white" : ""}
-                >
-                    Home
-                </span>
-            </Link>
-            <FilterOptions />
-            <Link to="/my-favorites">
-                <span
-                    onClick={() => setFilter("My Favorites")}
-                    className={
-                        filter === "My Favorites" ? "text-custom-white" : ""
-                    }
-                >
-                    My Favorites
-                </span>
-            </Link>
-        </>
-    );
-}
-
-function FilterOptions() {
-    const { filter, setFilter } = useContext(AppContext);
-
-    return (
-        <>
-            <Link
-                to="/"
-                onClick={() => setFilter("TV Shows")}
-                className={filter === "TV Shows" ? "text-custom-white" : ""}
-            >
-                TV Shows
-            </Link>
-            <Link
-                to="/"
-                onClick={() => setFilter("Movies")}
-                className={filter === "Movies" ? "text-custom-white" : ""}
-            >
-                Movies
-            </Link>
         </>
     );
 }

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Title } from "../lib/dataTypes";
-import { TitleList, Loading, AppContext } from "./index";
+import { AppContext } from "./index";
 import "../index.css";
 import { IoSearch } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export function SearchTitles({ mobile }: SearchTitlesProps) {
                 if (!response.ok)
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 const titlesArray: Title = await response.json();
-                // Remove duplicates by mal_id
+                // Remove duplicates by mal_id. The Map object stores the first instance of each mal_id and overwrites duplicates with the same key, ensuring uniqueness
                 const uniqueTitles = Array.from(
                     new Map(
                         titlesArray.data.map((item) => [item.mal_id, item])
@@ -43,7 +43,7 @@ export function SearchTitles({ mobile }: SearchTitlesProps) {
                 setIsSearchLoading(false);
             }
         }
-
+        // Aviods excessive calls to the API as the user types each letter
         const debounceTimer = setTimeout(loadSearchTitles, 1200);
 
         return () => clearTimeout(debounceTimer); // Cleanup debounce timer on input change
@@ -79,6 +79,7 @@ export function SearchInputBar({
 
     const location = useLocation();
 
+    // If user is not on a browsing page, navigate them to the home browsing page
     function handleSearchIconDown() {
         setIsSearchBarIconClicked(true);
         if (
@@ -114,30 +115,5 @@ export function SearchInputBar({
                 className="bg-inherit rounded-md w-max md:w-[290px] lg:w-[170px] xl:w-full text-custom-gray text-base xl:text-xl font-body focus:outline-none focus:text-custom-white caret-custom-white pr-4 self-end"
             />
         </div>
-    );
-}
-
-export function SearchResults() {
-    const { input, isSearchLoading, searchTitles } = useContext(AppContext);
-
-    return (
-        <>
-            {input.trim() !== "" && (
-                <div className="mt-8">
-                    <h3 className="text-2xl md:text-3xl font-heading pl-5 md:pl-7 py-2 text-custom-white">
-                        Search Results:
-                    </h3>
-                    {isSearchLoading ? (
-                        <Loading searchResults={true} />
-                    ) : searchTitles.length > 0 ? (
-                        <TitleList titles={searchTitles} searchListKey={true} />
-                    ) : (
-                        <p className="text-custom-gray text-xl pt-4 h-[320px]">
-                            No titles found matching your search.
-                        </p>
-                    )}
-                </div>
-            )}
-        </>
     );
 }
